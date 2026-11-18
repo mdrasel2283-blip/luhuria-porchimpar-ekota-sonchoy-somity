@@ -1,0 +1,21 @@
+{
+  "name": "লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি",
+  "short_name": "Luhuria Samity",
+  "description": "২০ জনা ৫ বছরের সঞ্চয় ও ঋণ প্রকল্প - Live Balance & Profit",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f766e",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

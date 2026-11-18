@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="images/logo.png">
+<title>লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি - Hisab Management</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--primary:#0f766e;--primary-dark:#115e59;--accent:#f59e0b;--bg:#f0fdfa;--card:#ffffff;--text:#134e4a;--muted:#6b7280;--border:#ccfbf1;--success:#059669;--danger:#dc2626;--info:#0284c7;--bkash:#e2136e;--nagad:#f7941d;}
+  body{font-family:'Noto Sans Bengali', system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--text); line-height:1.6}
+  header{background:linear-gradient(135deg, var(--primary) 0%, #065f46 100%); color:white; padding:14px 20px; position:sticky; top:0; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+  .header-inner{max-width:1200px;margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px}
+  .logo{display:flex; align-items:center; gap:12px}
+  .logo-icon{width:48px;height:48px; background:white; color:var(--primary); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800}
+  .logo h1{font-size:20px; line-height:1.2}
+  .logo p{font-size:11px; opacity:0.9}
+  .header-actions{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+  .btn{padding:8px 14px; border-radius:8px; border:none; cursor:pointer; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:6px; transition:0.2s}
+  .btn-primary{background:var(--accent); color:#78350f}
+  .btn-outline{background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3)}
+  .btn-outline:hover{background:rgba(255,255,255,0.25)}
+  .btn-sm{padding:6px 10px; font-size:12px}
+  .btn-success{background:var(--success); color:white}
+  .btn-danger{background:var(--danger); color:white}
+  .btn-ghost{background:#f0fdfa; color:var(--primary); border:1px solid var(--border)}
+  .pay-bar{max-width:1200px; margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding:8px 0 0 0}
+  .pay-pill{background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); padding:6px 12px; border-radius:999px; font-size:12px; display:flex; align-items:center; gap:8px}
+  .pay-pill b{letter-spacing:0.5px}
+  .pay-pill .copy-btn{background:white; color:var(--primary); border:none; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:800; cursor:pointer}
+  nav{background:white; border-bottom:1px solid var(--border); position:sticky; top:84px; z-index:90; overflow-x:auto}
+  .nav-inner{max-width:1200px; margin:0 auto; display:flex; gap:4px; padding:8px 16px}
+  .nav-btn{padding:10px 16px; border:none; background:transparent; cursor:pointer; font-size:14px; font-weight:600; color:var(--muted); border-radius:8px; white-space:nowrap; display:flex; align-items:center; gap:6px}
+  .nav-btn.active{background:var(--primary); color:white}
+  .nav-btn:hover:not(.active){background:var(--bg)}
+  .container{max-width:1200px; margin:0 auto; padding:20px 16px}
+  .cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:12px; margin-bottom:20px}
+  .card{background:var(--card); border-radius:14px; padding:16px; border:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+  .card-label{font-size:11px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px}
+  .card-value{font-size:20px; font-weight:800; margin:4px 0}
+  .card-sub{font-size:11px; color:var(--muted)}
+  .card-icon{width:36px;height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:8px}
+  .progress-wrap{background:white; border-radius:14px; padding:16px; border:1px solid var(--border); margin-bottom:20px}
+  .progress-bar{height:10px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:8px 0}
+  .progress-fill{height:100%; background:linear-gradient(90deg, var(--primary), var(--success)); border-radius:999px; transition:0.5s}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media(max-width:768px){.grid2{grid-template-columns:1fr} .header-inner{flex-direction:column; align-items:flex-start} nav{top:135px} .pay-bar{justify-content:flex-start}}
+  .section{background:white; border-radius:14px; border:1px solid var(--border); overflow:hidden; margin-bottom:16px}
+  .section-head{padding:12px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:#f8fafc}
+  .section-head h3{font-size:14px; font-weight:700}
+  .table-wrap{overflow-x:auto}
+  table{width:100%; border-collapse:collapse; font-size:13px}
+  th{background:#f0fdfa; text-align:left; padding:10px 12px; font-weight:700; color:var(--primary); white-space:nowrap; border-bottom:1px solid var(--border)}
+  td{padding:10px 12px; border-bottom:1px solid #f1f5f9; vertical-align:middle}
+  tr:hover td{background:#f8fffe}
+  .badge{padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700; display:inline-block}
+  .badge-success{background:#d1fae5; color:#065f46}
+  .badge-warning{background:#fef3c7; color:#92400e}
+  .badge-danger{background:#fee2e2; color:#991b1b}
+  .badge-info{background:#dbeafe; color:#1e40af}
+  .badge-dark{background:#fef9c3; color:#713f12; border:1px solid #fde68a}
+  .avatar{width:36px;height:36px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px}
+  input, select, textarea{padding:9px 12px; border:1px solid #d1d5db; border-radius:8px; font-size:14px; width:100%; font-family:inherit}
+  input:focus, select:focus, textarea:focus{outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(15,118,110,0.1)}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+  .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.5); display:none; align-items:center; justify-content:center; z-index:200; padding:16px}
+  .modal-overlay.open{display:flex}
+  .modal{background:white; border-radius:16px; width:100%; max-width:560px; max-height:90vh; overflow:auto; box-shadow:0 20px 40px rgba(0,0,0,0.2)}
+  .modal-head{padding:16px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:white}
+  .modal-body{padding:20px}
+  .empty{padding:30px 20px; text-align:center; color:var(--muted)}
+  .alert{padding:12px 14px; border-radius:10px; font-size:13px; margin-bottom:14px; display:flex; gap:10px; align-items:flex-start}
+  .alert-info{background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af}
+  .alert-success{background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46}
+  .alert-warning{background:#fffbeb; border:1px solid #fde68a; color:#92400e}
+  .alert-danger{background:#fef2f2; border:1px solid #fecaca; color:#991b1b}
+  footer{text-align:center; padding:20px; color:var(--muted); font-size:12px}
+  .view{display:none}
+  .view.active{display:block}
+  .rule-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:12px}
+  .rule-card{padding:14px; border-radius:12px; border:1px solid var(--border); position:relative}
+  .rule-card h4{font-size:13px; margin-bottom:4px; display:flex; align-items:center; gap:6px}
+  .rule-card p{font-size:12px; line-height:1.6; color:#334155}
+  .rule-num{position:absolute; top:8px; right:10px; font-size:20px; font-weight:800; opacity:0.08}
+  .joma-controls{background:#f8fafc; padding:12px; border-bottom:1px solid var(--border); display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .copy-toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111827; color:white; padding:10px 16px; border-radius:999px; font-size:13px; display:none; z-index:300}
+  .copy-toast.show{display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo" style="width:52px; height:52px; border-radius:12px; background:white; padding:2px; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.15)">
+      <div>
+        <h1 id="hdrName">লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি</h1>
+        <p id="hdrSub">৫ বছরের সঞ্চয় ও ঋণ প্রকল্প • জানু ২০২৬ - ডিসে ২০৩০ • সদস্য সংখ্যা নমনীয়</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span id="offlineBadge" class="badge badge-success" style="background:#25D366">🌐 Online</span>
+      <button class="btn btn-outline" onclick="exportCSV()">📊 Excel</button>
+      <button class="btn btn-outline" onclick="window.print()">🖨️ প্রিন্ট</button>
+      <button class="btn btn-primary" onclick="openSettings()">⚙️ সেটিংস</button>
+      <span id="adminBadge" class="badge badge-success" style="display:none">ADMIN</span>
+      <button class="btn btn-outline btn-sm" id="adminToggleBtn" onclick="toggleAdmin()">🔓 Admin লগইন</button>
+      <button class="btn btn-sm" style="background:#0ea5e9; color:white" onclick="switchView('memberLogin')">👤 My Balance</button>
+    </div>
+  </div>
+  <div class="pay-bar" id="payBar">
+    <!-- filled by JS -->
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" data-view="dashboard" onclick="switchView('dashboard')">📊 ড্যাশবোর্ড</button>
+    <button class="nav-btn" data-view="members" onclick="switchView('members')">👥 সদস্য</button>
+    <button class="nav-btn" data-view="joma" onclick="switchView('joma')">💰 জমা হিসাব</button>
+    <button class="nav-btn" data-view="loan" onclick="switchView('loan')">🏦 ঋণ</button>
+    <button class="nav-btn" data-view="hisab" onclick="switchView('hisab')">📒 লেজার</button>
+    <button class="nav-btn" data-view="report" onclick="switchView('report')">📈 রিপোর্ট</button>
+    <button class="nav-btn" data-view="rules" onclick="switchView('rules')">📜 নিয়মাবলী</button>
+    <button class="nav-btn" data-view="guide" onclick="switchView('guide')">❓ কিভাবে দেখবেন</button>
+    <button class="nav-btn" data-view="memberLogin" onclick="switchView('memberLogin')">🔒 My Balance (Offline)</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="installBanner" style="display:none; background:linear-gradient(135deg, #0f766e 0%, #065f46 100%); color:white; padding:12px 16px; border-radius:12px; margin-bottom:16px; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+    <div style="display:flex; align-items:center; gap:10px"><span style="font-size:20px">📲</span><div><div style="font-weight:800; font-size:13px">মোবাইল ও ল্যাপটপে App হিসেবে ব্যবহার করুন</div><div style="font-size:11px; opacity:0.9">Offline ও কাজ করবে • Home Screen এ Add করুন</div></div></div>
+    <button class="btn" style="background:white; color:#0f766e; font-weight:800" onclick="installApp()">📥 Install App</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="view-dashboard" class="view active">
+    <div id="autoReminderBox" style="display:none"></div>
+    <div class="alert alert-danger">
+      <span>🔒</span>
+      <div><b>গুরুত্বপূর্ণ নিয়ম:</b> ৫ বছরের আগে কেউ টাকা তুলতে পারবে না। ১-১০ তারিখের মধ্যে টাকা না দিলে <b>৩০ টাকা জরিমানা</b>। কিস্তি মিস করলে ৫ বছর পর শুধু আসল টাকা ফেরত, কোনো লাভ পাবে না।</div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:#ccfbf1">💵</div>
+        <div class="card-label">মোট তহবিল (Cash)</div>
+        <div class="card-value" id="kpiBalance">৳ 0</div>
+        <div class="card-sub">জমা + লাভ + জরিমানা - বকেয়া লোন</div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#d1fae5">📥</div>
+        <div class="card-label">মোট জমা</div>
+        <div class="card-value" id="kpiJoma">৳ 0</div>
+        <div class="card-sub" id="kpiJomaSub"></div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#fef3c7">🏦</div>
+        <div class="card-label">মোট ঋণ বিতরণ</div>
+        <div class="card-value" id="kpiLoanGiven">৳ 0</div>
+        <div class="card-sub" id="kpiLoanCount">0 টি লোন</div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#dbeafe">📈</div>
+        <div class="card-label">মোট লাভ (৫% + জরিমানা)</div>
+        <div class="card-value" style="color:var(--success)" id="kpiProfit">৳ 0</div>
+        <div class="card-sub" id="kpiProfitSub"></div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#fee2e2">⏳</div>
+        <div class="card-label">বকেয়া আদায়</div>
+        <div class="card-value" style="color:var(--danger)" id="kpiDue">৳ 0</div>
+        <div class="card-sub">ফেরত পেতে বাকি</div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#fef9c3">⚠️</div>
+        <div class="card-label">জরিমানা আদায়</div>
+        <div class="card-value" style="color:#92400e" id="kpiFine">৳ 0</div>
+        <div class="card-sub" id="kpiFineCount">0 টি</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px">
+        <div>
+          <h3 style="font-size:14px">📅 ৫ বছরের অগ্রগতি <span style="font-weight:400; color:var(--muted); font-size:12px" id="lockInfo"></span></h3>
+          <p style="font-size:12px; color:var(--muted)" id="progressText">মাস 1 / 60</p>
+        </div>
+        <span class="badge badge-info" id="progressPct">0% সম্পন্ন</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted)">
+        <span id="startLabel">শুরু: জানু ২০২৬</span><span id="endLabel">মেয়াদ শেষ: ডিসে ২০৩০ (টাকা ফেরত)</span>
+      </div>
+      <div class="alert alert-warning" style="margin-top:10px; margin-bottom:0; padding:8px 12px; font-size:12px">🔒 ৫ বছরের আগে কোনো সদস্য আসল টাকা বা লাভ তুলতে পারবে না। মেয়াদ শেষে একসাথে বন্টন।</div>
+    </div>
+
+    <div class="section" style="background:linear-gradient(135deg, #0f766e 0%, #065f46 100%); color:white; border:none">
+      <div style="padding:16px; display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap">
+        <div style="display:flex; gap:12px; align-items:center">
+          <div style="width:50px; height:50px; background:white; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px">📲</div>
+          <div>
+            <div style="font-weight:800; font-size:14px">১ ক্লিকে মোবাইল ও ল্যাপটপে Install করুন</div>
+            <div style="font-size:12px; opacity:0.9">App হিসেবে Home Screen e thakbe • Offline eo cholbe • Live Update</div>
+          </div>
+        </div>
+        <button class="btn" style="background:white; color:#0f766e; font-weight:800; padding:12px 20px; font-size:14px" onclick="installApp()">📥 1 Click Install</button>
+      </div>
+      <div style="padding:0 16px 12px; font-size:11px; opacity:0.85; display:flex; gap:12px; flex-wrap:wrap"><span>✅ Android</span><span>✅ iPhone</span><span>✅ Laptop (Chrome/Edge)</span><span>✅ Offline</span></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h3>💳 টাকা পাঠানোর মাধ্যম</h3><span style="font-size:12px; color:var(--muted)">১-১০ তারিখের মধ্যে পাঠাতে হবে</span></div>
+      <div style="padding:16px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px" id="payBoxDash"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="section">
+        <div class="section-head"><h3>🔥 সাম্প্রতিক লেনদেন</h3></div>
+        <div id="recentTx" style="padding:12px"></div>
+      </div>
+      <div class="section">
+        <div class="section-head"><h3>🏆 টপ সঞ্চয়কারী</h3></div>
+        <div id="topSavers" style="padding:12px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBERS -->
+  <div id="view-members" class="view">
+    <div class="section">
+      <div class="section-head">
+        <h3>👥 সদস্য তালিকা</h3>
+        <div style="display:flex; gap:8px; flex-wrap:wrap">
+          <input type="text" id="memberSearch" placeholder="🔍 নাম/ফোন খুঁজুন" style="width:180px" oninput="renderMembers()">
+          <button class="btn btn-success btn-sm" onclick="openMemberModal()">+ নতুন সদস্য</button>
+          <button class="btn btn-ghost btn-sm" onclick="sendAllReminders()">💬 সবাইকে রিমাইন্ডার</button>
+          <button class="btn btn-ghost btn-sm" onclick="reset20Members()">♻️ রিসেট</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>সদস্য</th><th>WhatsApp</th><th>মোট জমা</th><th>জরিমানা</th><th>মিস কিস্তি</th><th>ঋণ/বকেয়া</th><th>লাভ পাবে?</th><th>অ্যাকশন</th></tr></thead>
+          <tbody id="memberTable"></tbody>
+        </table>
+      </div>
+      <div style="padding:10px 14px; font-size:11px; color:var(--muted); background:#fffbeb; border-top:1px solid var(--border)">⚠️ <b>নতুন নিয়ম:</b> টানা <b>৩ মাস</b> টাকা জমা না দিলে <b>সদস্যপদ বাতিল</b> - লাল “🚫 বাতিল” দেখাবে। টানা ২ মাস মিস করলে হলুদ সতর্কতা আসবে।</div>
+    </div>
+  </div>
+
+  <!-- JOMA -->
+  <div id="view-joma" class="view">
+    <div class="section">
+      <div class="section-head">
+        <h3>💰 মাসিক জমা ম্যানেজমেন্ট</h3>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center">
+          <select id="jomaMonthSelect" style="width:auto; min-width:160px" onchange="renderJoma()"></select>
+          <button class="btn btn-success btn-sm" onclick="markAllPaid()">✅ সবার জমা নিন</button>
+          <button class="btn btn-ghost btn-sm" onclick="addCustomJoma()">+ কাস্টম</button>
+        </div>
+      </div>
+      <div class="joma-controls">
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; flex:1">
+          <label style="font-size:12px; font-weight:700; white-space:nowrap">📅 জমার তারিখ:</label>
+          <input type="date" id="jomaPayDate" style="width:auto; min-width:150px" onchange="renderJoma()">
+          <select id="jomaMethod" style="width:auto"><option value="Cash">💵 Hate/Cash - 500 Taka</option><option value="bKash">📱 bKash - 520 Taka (fee soho)</option><option value="Nagad">📱 Nagad - 520 Taka (fee soho)</option></select>
+          <span style="font-size:11px; color:var(--muted)" id="jomaDateHint"></span>
+        </div>
+        <button class="btn btn-sm" style="background:#25D366; color:white" onclick="sendRemindersForCurrentMonth()">💬 বাকিদের WhatsApp রিমাইন্ডার পাঠান</button>
+        <div style="font-size:11px; background:#fef2f2; color:#991b1b; padding:6px 10px; border-radius:8px; border:1px solid #fecaca">⏰ ১-১০ তারিখের পর <b>৩০৳ জরিমানা</b></div>
+      </div>
+      <div style="padding:12px">
+        <div class="alert alert-success" id="jomaSummary"></div>
+        <div style="background:#f0fdfa; padding:10px; border-radius:8px; border:1px solid var(--border); display:flex; gap:12px; flex-wrap:wrap; font-size:12px; margin-bottom:12px" id="jomaPayInfo"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>সদস্য</th><th>এই মাসে অবস্থা</th><th>মোট জমা</th><th>মিস</th><th>অ্যাকশন</th></tr></thead>
+            <tbody id="jomaTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h3>📅 মাসওয়ারি কালেকশন রিপোর্ট</h3></div>
+      <div class="table-wrap"><table><thead><tr><th>মাস</th><th>জমা</th><th>টাকা</th><th>জরিমানা</th><th>বাকি</th></tr></thead><tbody id="monthlyReport"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- LOAN -->
+  <div id="view-loan" class="view">
+    <div class="alert alert-warning" style="display:flex; gap:8px">
+      <span>📜</span>
+      <div style="font-size:12px; line-height:1.6"><b>ঋণের নতুন নিয়ম:</b> ① যে আগে চাইবে সে আগে পাবে (সিরিয়াল) ② ১ মাসের লাভ <b>অগ্রিম</b> দিতে হবে ③ ১ টা লোন থাকতে আরেকটা নয় ④ টানা ৩ মাস মিসে সদস্যপদ বাতিল</div>
+    </div>
+    <div class="grid2">
+      <div class="section">
+        <div class="section-head"><h3>🏦 নতুন ঋণ দিন (৫% লাভ)</h3></div>
+        <div style="padding:16px">
+          <div class="form-grid">
+            <div><label style="font-size:12px; font-weight:700">সদস্য</label><select id="loanMember"></select></div>
+            <div><label style="font-size:12px; font-weight:700">পরিমাণ (৳)</label><input type="number" id="loanAmount" placeholder="10000"></div>
+            <div><label style="font-size:12px; font-weight:700">সুদ %</label><input type="number" id="loanRate" value="5"></div>
+            <div><label style="font-size:12px; font-weight:700">তারিখ</label><input type="date" id="loanDate"></div>
+          </div>
+          <div style="margin-top:10px"><label style="font-size:12px; font-weight:700">নোট</label><input type="text" id="loanNote" placeholder="কারণ"></div>
+          <div style="background:#fffbeb; padding:12px; border-radius:8px; margin-top:12px; font-size:13px; border:1px solid #fde68a" id="loanPreview">প্রিভিউ: পরিমাণ লিখুন</div>
+          <div style="background:#eff6ff; padding:10px; border-radius:8px; margin-top:10px; font-size:12px; border:1px solid #bfdbfe; display:flex; gap:8px; align-items:center">
+            <input type="checkbox" id="advanceCheck" style="width:auto" checked> <label for="advanceCheck" style="font-size:12px; font-weight:600">✅ ১ মাসের লাভ অগ্রিম জমা নিয়েছি (ঋণ দেওয়ার সময় কাটা হবে)</label>
+          </div>
+          <div id="loanWarnings" style="margin-top:8px"></div>
+          <button class="btn btn-success" style="width:100%; margin-top:12px; justify-content:center" onclick="giveLoan()">✅ ঋণ অনুমোদন (সিরিয়াল অনুযায়ী)</button>
+          <p style="font-size:11px; color:var(--muted); margin-top:8px; text-align:center">ক্যাশ ব্যালেন্স থেকে কাটা হবে • ১ টা ঋণ থাকতে ২য় নয় • অগ্রিম লাভ ফান্ডে জমা হবে</p>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-head"><h3>💳 ঋণ ফেরত</h3></div>
+        <div style="padding:16px">
+          <label style="font-size:12px; font-weight:700">ঋণ নির্বাচন</label><select id="repayLoanSelect" onchange="updateRepayPreview()"></select>
+          <div id="repayPreview" style="background:#ecfdf5; padding:12px; border-radius:8px; margin-top:10px; font-size:13px; border:1px solid #a7f3d0"></div>
+          <div style="margin-top:12px"><label style="font-size:12px; font-weight:700">পরিমাণ</label><input type="number" id="repayAmount" placeholder="5000"></div>
+          <div style="margin-top:8px"><label style="font-size:12px; font-weight:700">তারিখ</label><input type="date" id="repayDate"></div>
+          <button class="btn btn-primary" style="width:100%; margin-top:12px; justify-content:center; background:var(--primary); color:white" onclick="repayLoan()">💰 জমা নিন</button>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h3>📋 সকল ঋণের তালিকা</h3><select id="loanFilter" onchange="renderLoans()" style="width:auto"><option value="all">সব</option><option value="due">বকেয়া</option><option value="paid">পরিশোধিত</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th>#</th><th>সদস্য</th><th>ঋণ</th><th>লাভ</th><th>মোট দিতে হবে</th><th>পরিশোধ</th><th>বকেয়া</th><th>তারিখ</th><th>অবস্থা</th><th></th></tr></thead><tbody id="loanTable"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- HISAB -->
+  <div id="view-hisab" class="view">
+    <div class="section">
+      <div class="section-head"><h3>📒 স্বচ্ছ লেজার</h3><div style="display:flex; gap:8px"><select id="ledgerFilter" onchange="renderLedger()" style="width:auto"><option value="all">সব</option><option value="joma">জমা</option><option value="fine">জরিমানা</option><option value="loan">ঋণ</option><option value="repay">ফেরত</option></select><button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇️ CSV</button></div></div>
+      <div style="padding:12px"><div class="table-wrap"><table><thead><tr><th>তারিখ</th><th>ধরন</th><th>সদস্য</th><th>বিবরণ</th><th>পরিমাণ</th><th>ব্যালেন্স</th></tr></thead><tbody id="ledgerTable"></tbody></table></div></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h3>👤 ব্যক্তিগত হিসাব - কে কত লাভ পাবে</h3><select id="personalSelect" onchange="renderPersonal()" style="width:auto; min-width:200px"></select></div>
+      <div id="personalCard" style="padding:16px"></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h3>🔍 সব সদস্যের তারিখ-ওয়ারী জমা - স্বচ্ছ হিসাব</h3>
+        <div style="display:flex; gap:8px; flex-wrap:wrap">
+          <input type="text" id="transSearch" placeholder="🔍 নাম/তারিখ খুঁজুন" style="width:180px" oninput="renderTransparency()">
+          <select id="transFilter" style="width:auto" onchange="renderTransparency()"><option value="all">সব</option><option value="2026">২০২৬</option><option value="2027">২০২৭</option><option value="2028">২০২৮</option><option value="2029">২০২৯</option><option value="2030">২০৩০</option></select>
+        </div>
+      </div>
+      <div style="padding:12px; background:#f0fdfa; font-size:12px; color:#334155">💡 এই টেবিলে <b>প্রত্যেকে দেখতে পারবে কে কত তারিখে কত টাকা জমা দিলো, কোন মাধ্যমে (Cash/bKash/Nagad), জরিমানা কত, এবং তার লাভ কত</b>। কোনো লুকোচুরি নেই।</div>
+      <div class="table-wrap"><table><thead><tr><th>তারিখ</th><th>সদস্য</th><th>মাস</th><th>মাধ্যম</th><th>জমা</th><th>জরিমানা</th><th>লাভের যোগ্যতা</th></tr></thead><tbody id="transTable"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- REPORT -->
+  <div id="view-report" class="view">
+    <div class="grid2">
+      <div class="section"><div class="section-head"><h3>📊 ৫ বছরের প্রজেকশন</h3></div><div style="padding:16px; font-size:13px" id="projectionBox"></div></div>
+      <div class="section"><div class="section-head"><h3>💰 লাভ বন্টন</h3></div><div style="padding:16px" id="profitShareBox"></div></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h3>🖨️ প্রিন্ট ও শেয়ার</h3></div>
+      <div style="padding:16px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn btn-success" onclick="window.print()">🖨️ প্রিন্ট</button>
+        <button class="btn btn-ghost" onclick="exportCSV()">📥 CSV ডাউনলোড</button>
+        <button class="btn btn-ghost" onclick="shareWhatsApp()">💬 WhatsApp শেয়ার</button>
+        <button class="btn btn-danger" onclick="clearAllData()">🗑️ সব মুছুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div id="view-rules" class="view">
+    <div class="section">
+      <div class="section-head"><h3>📜 সমিতির নিয়মাবলী - সবাই মেনে চলুন</h3><span class="badge badge-danger">৫ বছরের চুক্তি</span></div>
+      <div style="padding:16px">
+        <div class="rule-grid">
+          <div class="rule-card" style="background:#f0fdfa; border-color:var(--border)"><div class="rule-num">01</div><h4>💰 জমার নিয়ম</h4><p>প্রাথমিক জমা <b>৳১,০০০</b> এককালীন। এরপর প্রতি মাসে <b>৳৫০০</b> করে ৬০ মাস (৫ বছর) জমা দিতে হবে। মোট জমা হবে <b>৩১,০০০ টাকা</b> জনপ্রতি।</p></div>
+          <div class="rule-card" style="background:#fffbeb; border-color:#fde68a"><div class="rule-num">02</div><h4>⏰ সময় ও জরিমানা</h4><p>প্রতি মাসের <b>১ - ১০ তারিখের মধ্যে</b> টাকা জমা দিতে হবে। ১০ তারিখ পার হলে <b>৩০ টাকা জরিমানা</b>। জরিমানা সমিতির ফান্ডে জমা হবে।</p></div>
+          <div class="rule-card" style="background:#fef2f2; border-color:#fecaca"><div class="rule-num">03</div><h4>🔒 ৫ বছর লক-ইন</h4><p><b>৫ বছরের আগে কেউ কোনো টাকা তুলতে পারবে না</b> - আসলও না, লাভও না। মেয়াদ শেষে (ডিসে ২০৩০) একসাথে সব টাকা বন্টন করা হবে।</p></div>
+          <div class="rule-card" style="background:#fef9c3; border-color:#fde68a"><div class="rule-num">04</div><h4>⚠️ কিস্তি মিস করলে</h4><p>কোনো মাসে কিস্তি না দিলে সেই সদস্য <b>৫ বছর পর শুধু আসল টাকা ফেরত পাবে, কোনো লাভ পাবে না</b>। লাভ শুধু নিয়মিত সদস্যদের মধ্যে ভাগ হবে।</p></div>
+          <div class="rule-card" style="background:#eff6ff; border-color:#bfdbfe"><div class="rule-num">05</div><h4>🏦 ঋণ নিয়ম</h4><p>জমা টাকা থেকে সদস্যদের মধ্যে <b>৫% লাভে ঋণ</b> দেওয়া হবে। যেমন ১০,০০০ টাকা নিলে ৫০০ টাকা লাভ সহ ১০,৫০০ ফেরত দিতে হবে। পর্যাপ্ত ব্যালেন্স থাকলে ঋণ দেওয়া হবে।</p></div>
+          <div class="rule-card" style="background:#ecfdf5; border-color:#a7f3d0"><div class="rule-num">06</div><h4>📊 লাভ বন্টন</h4><p>ঋণের লাভ + জরিমানা মিলে মোট লাভ হবে। <b>নিয়মিত সদস্যদের মধ্যে সমান ভাগে</b> লাভ বন্টন হবে। মিস করা সদস্য বাদ যাবে।</p></div>
+          <div class="rule-card" style="background:#fee2e2; border-color:#fecaca"><div class="rule-num">07</div><h4>🚫 ৩ মাস মিসে বাতিল</h4><p>টানা <b>৩ মাস</b> টাকা জমা না দিলে সদস্যপদ <b>অটো বাতিল</b>। বাতিল সদস্য ৫ বছর শেষে শুধু জমা টাকা ফেরত পাবে না, পুনরায় আবেদন করতে হবে।</p></div>
+          <div class="rule-card" style="background:#f3e8ff; border-color:#d8b4fe"><div class="rule-num">08</div><h4>🏦 ঋণ সিরিয়াল</h4><p>যে আগে ঋণের আবেদন করবে সে আগে পাবে। ১ মাসের লাভ <b>অগ্রিম</b> দিতে হবে। ১ টা ঋণ থাকতে আরেকটা ঋণ দেওয়া হবে না।</p></div>
+        </div>
+        <div class="alert alert-info" style="margin-top:16px">
+          <span>💡</span>
+          <div><b>টাকা পাঠানোর নিয়ম:</b> bKash / Nagad থেকে সেন্ড মানি করে <b>১-১০ তারিখের মধ্যে</b> পাঠাতে হবে। রেফারেন্সে নিজের নাম লিখবেন। Admin কনফার্ম করলে হিসাব আপডেট হবে।<br>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px" id="rulePayNumbers"></div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:16px; padding:12px; background:#f8fafc; border-radius:10px; font-size:12px; color:var(--muted)">এই নিয়মগুলো সেটিংস থেকে পরিবর্তন করা যাবে (Admin)। সব সদস্য এই পেজটি প্রিন্ট করে রাখুন।</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE - Kivabe Dekhben -->
+  <div id="view-guide" class="view">
+    <div class="section">
+      <div class="section-head"><h3>❓ ওয়েবসাইটে কার কত ব্যালেন্স ও লাভ কিভাবে দেখবেন</h3><span class="badge badge-info">ধাপে ধাপে গাইড</span></div>
+      <div style="padding:16px">
+        <div class="alert alert-success"><span>👁️</span><div><b>সবাই একই লিংকে সব হিসাব লাইভ দেখতে পারবে - কোনো পাসওয়ার্ড লাগে না। শুধু Admin এডিট করতে পারবে।</b></div></div>
+        
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px; margin-top:12px">
+          <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:white">
+            <div style="background:var(--primary); color:white; padding:10px 14px; font-weight:700; font-size:13px">ধাপ ১: ড্যাশবোর্ডে মোট হিসাব</div>
+            <div style="padding:12px; font-size:12px; line-height:1.7">
+              <b>📊 ড্যাশবোর্ড</b> বাটনে ক্লিক করুন।<br>
+              • <b>মোট তহবিল (Cash)</b> - বর্তমানে হাতে কত টাকা আছে<br>
+              • <b>মোট জমা</b> - ২০ জনে মিলে কত জমা হয়েছে<br>
+              • <b>মোট লাভ (৫% + জরিমানা)</b> - ঋণ ও জরিমানা থেকে লাভ<br>
+              • <b>জরিমানা</b> - কত টাকা জরিমানা আদায়<br>
+              <div style="background:#f0fdfa; padding:8px; border-radius:8px; margin-top:8px; border:1px dashed var(--border)">💡 কারো ফোন থেকে <b>index.html</b> লিংক ওপেন করলেই ড্যাশবোর্ড আসবে</div>
+            </div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:white">
+            <div style="background:#0ea5e9; color:white; padding:10px 14px; font-weight:700; font-size:13px">ধাপ ২: নিজের ব্যালেন্স দেখুন</div>
+            <div style="padding:12px; font-size:12px; line-height:1.7">
+              <b>👥 সদস্য</b> ট্যাবে যান।<br>
+              • তালিকায় আপনার নাম খুঁজুন<br>
+              • <b>মোট জমা</b> কলামে আপনার জমা<br>
+              • <b>মিস কিস্তি</b> - কয় মাস মিস করেছেন<br>
+              • <b>লাভ পাবে?</b> - ✅ লাভ পাবে / ❌ শুধু আসল (৩ মাস মিসে বাতিল)<br>
+              • ডান পাশে <b>👁️</b> তে ক্লিক করলে বিস্তারিত
+            </div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:white">
+            <div style="background:#f59e0b; color:white; padding:10px 14px; font-weight:700; font-size:13px">ধাপ ৩: ব্যক্তিগত লাভের হিসাব</div>
+            <div style="padding:12px; font-size:12px; line-height:1.7">
+              <b>📒 লেজার → ব্যক্তিগত হিসাব</b><br>
+              • উপরে নাম সিলেক্ট করুন<br>
+              • <b>মোট জমা, জরিমানা, ঋণ, বকেয়া</b> আলাদা কার্ডে<br>
+              • নিচে <b>৫ বছর পর পাবে:</b> লেখা দেখুন<br>
+              • ✅ থাকলে <b>আসল + লাভ</b><br>
+              • ❌ থাকলে <b>শুধু আসল</b> + কারণ
+            </div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:white">
+            <div style="background:#059669; color:white; padding:10px 14px; font-weight:700; font-size:13px">ধাপ ৪: তারিখ-ওয়ারী স্বচ্ছ হিসাব</div>
+            <div style="padding:12px; font-size:12px; line-height:1.7">
+              <b>📒 লেজার → স্বচ্ছ লেজার</b> + নিচের টেবিল<br>
+              • <b>কে কত তারিখে কত টাকা</b> জমা দিল<br>
+              • মাধ্যম: 💵 Cash / 📱 bKash / 📱 Nagad<br>
+              • জরিমানা কত, লাভের যোগ্যতা<br>
+              • সার্চ বক্সে নাম/তারিখ লিখে খুঁজুন<br>
+              • <b>📥 CSV</b> তে ডাউনলোড করে প্রিন্ট
+            </div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:white">
+            <div style="background:#7c3aed; color:white; padding:10px 14px; font-weight:700; font-size:13px">ধাপ ৫: ৫ বছর পর কত পাবেন?</div>
+            <div style="padding:12px; font-size:12px; line-height:1.7">
+              <b>📈 রিপোর্ট</b> ট্যাবে যান<br>
+              • <b>৫ বছরের প্রজেকশন</b> - মোট কত জমা হবে<br>
+              • <b>লাভ বন্টন</b> - নিয়মিত সদস্য কত পাবে<br>
+              • মিস করা সদস্য শুধু আসল পাবে<br>
+              • <b>বাতিল সদস্য</b> (৩ মাস টানা মিস) আলাদা দেখাবে
+            </div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:white">
+            <div style="background:#e2136e; color:white; padding:10px 14px; font-weight:700; font-size:13px">ধাপ ৬: ঋণ কিভাবে দেখবেন</div>
+            <div style="padding:12px; font-size:12px; line-height:1.7">
+              <b>🏦 ঋণ</b> ট্যাবে<br>
+              • কে কত ঋণ নিয়েছে, কত ফেরত দিয়েছে<br>
+              • বকেয়া কত, লাভ কত (৫%)<br>
+              • <b>নিয়ম:</b> যে আগে চাইবে সে আগে পাবে<br>
+              • ১ মাসের লাভ <b>অগ্রিম</b> দিতে হবে<br>
+              • ১ টা ঋণ থাকতে আরেকটা নয়
+            </div>
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg, var(--primary) 0%, #065f46 100%); color:white; padding:16px; border-radius:12px; margin-top:16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:space-between">
+          <div>
+            <div style="font-weight:800; font-size:14px">📱 মোবাইলে কিভাবে রাখবেন?</div>
+            <div style="font-size:12px; opacity:0.9; margin-top:4px">Chrome এ লিংক ওপেন → উপরে ৩ ডট → Add to Home Screen → অ্যাপের মতো হবে, নোটিফিকেশন আসবে</div>
+          </div>
+          <button class="btn" style="background:white; color:var(--primary)" onclick="switchView('dashboard')">✅ বুঝেছি, ড্যাশবোর্ডে যান</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h3>🎥 ভিডিও গাইড</h3></div>
+      <div style="padding:16px; text-align:center">
+        <p style="font-size:13px; color:var(--muted); margin-bottom:12px">ভিডিওতে বিস্তারিত দেখানো হয়েছে - কিভাবে ব্যালেন্স ও লাভ দেখবেন</p>
+        <a href="video-details.html" target="_blank" class="btn btn-success" style="padding:12px 20px; font-size:14px; text-decoration:none">▶️ ভিডিও দেখুন (Details Video)</a>
+        <div style="margin-top:12px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="window.print()">🖨️ গাইড প্রিন্ট করুন</button>
+          <button class="btn btn-ghost" onclick="shareWhatsApp()">💬 WhatsApp এ শেয়ার</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBER LOGIN - Offline Live Balance -->
+  <div id="view-memberLogin" class="view">
+    <div class="section" style="max-width:500px; margin:0 auto">
+      <div class="section-head" style="background:linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color:white"><h3 style="color:white">🔒 My Balance - Offline Live হিসাব</h3><span style="font-size:11px; opacity:0.9">Offline কাজ করে</span></div>
+      <div style="padding:20px">
+        <div id="memberLoginForm">
+          <div style="text-align:center; margin-bottom:16px">
+            <img src="images/logo.png" style="width:70px; height:70px; border-radius:50%; border:3px solid #e0f2fe">
+            <h3 style="margin-top:8px">লুহুরিয়া পশ্চিমপাড় সমিতি</h3>
+            <p style="font-size:12px; color:var(--muted)">আপনার ফোন ও পাসওয়ার্ড দিন - Admin আপনাকে পাসওয়ার্ড দেবে</p>
+          </div>
+          <div style="background:#f0f9ff; padding:12px; border-radius:10px; border:1px solid #bae6fd; margin-bottom:12px; font-size:12px">
+            💡 <b>Offline সুবিধা:</b> একবার লগইন করলে ইন্টারনেট ছাড়াও আপনার <b>Live Balance, Main Balance, Lave</b> দেখতে পারবেন। Admin যে পাসওয়ার্ড দেবে সেটা ব্যবহার করুন (ডিফল্ট: <b>1234</b>)
+          </div>
+          <label style="font-size:12px; font-weight:700">📱 ফোন নম্বর</label><input type="text" id="loginPhone" placeholder="017XXXXXXXX" style="margin-top:4px">
+          <div style="margin-top:10px"><label style="font-size:12px; font-weight:700">🔑 পাসওয়ার্ড (Admin দেবে)</label><input type="password" id="loginPass" placeholder="1234"></div>
+          <button class="btn btn-success" style="width:100%; margin-top:14px; justify-content:center; background:#0ea5e9" onclick="memberLogin()">🔓 লগইন করুন (Offline)</button>
+          <p style="font-size:11px; color:var(--muted); text-align:center; margin-top:8px">Admin প্রতিজনের জন্য fixed password সেট করে দেবে - Settings থেকে change করা যায়</p>
+        </div>
+        <div id="memberDashboard" style="display:none"></div>
+      </div>
+    </div>
+    <div class="section" style="max-width:500px; margin:16px auto 0">
+      <div class="section-head"><h3>📱 Offline কিভাবে কাজ করে?</h3></div>
+      <div style="padding:14px; font-size:12px; line-height:1.8">
+        <ol style="margin-left:16px">
+          <li>Chrome এ <b>Add to Home Screen</b> করুন - অ্যাপ হবে</li>
+          <li>একবার Online এ লগইন করলে data save হবে</li>
+          <li>এরপর <b>Offline (net ছাড়া)</b> ও খুলবে, Live Balance দেখাবে</li>
+          <li>Admin পাসওয়ার্ড change করলে নতুনটা নিতে Online আসতে হবে</li>
+        </ol>
+        <div style="background:#ecfdf5; padding:10px; border-radius:8px; margin-top:10px; border:1px solid #a7f3d0; text-align:center"><b>🌐 Online:</b> <span id="offlineStatusText">Checking...</span> • <b>Live Update:</b> Auto</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 - লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি • ৫ বছর মেয়াদী সঞ্চয় প্রকল্প • সব হিসাব স্বচ্ছ • Est. Jan 2026</footer>
+
+<div class="copy-toast" id="copyToast">✅ কপি করা হয়েছে</div>
+
+<!-- Member Modal -->
+<div class="modal-overlay" id="memberModal">
+  <div class="modal">
+    <div class="modal-head"><h3>👤 সদস্য</h3><button class="btn btn-ghost btn-sm" onclick="closeModal('memberModal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="mId">
+      <div style="display:flex; gap:16px; align-items:center; background:#f0fdfa; padding:12px; border-radius:12px; border:1px dashed var(--border); margin-bottom:12px">
+        <div style="position:relative">
+          <img id="mPhotoPreview" src="" style="width:70px; height:70px; border-radius:50%; object-fit:cover; border:3px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.1); display:none">
+          <div id="mPhotoPlaceholder" style="width:70px; height:70px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:800">?</div>
+        </div>
+        <div style="flex:1">
+          <label style="font-size:12px; font-weight:700">📸 প্রোফাইল ছবি</label>
+          <input type="file" id="mPhoto" accept="image/*" onchange="previewPhoto(this)" style="margin-top:6px; font-size:12px">
+          <div style="font-size:11px; color:var(--muted); margin-top:4px">JPG/PNG, 2MB এর মধ্যে। সবাই ছবি দেখতে পাবে</div>
+          <input type="hidden" id="mPhotoData">
+          <button type="button" class="btn btn-ghost btn-sm" style="margin-top:6px; padding:4px 8px; font-size:10px" onclick="clearPhoto()">🗑️ ছবি মুছুন</button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div><label style="font-size:12px; font-weight:700">নাম *</label><input type="text" id="mName" placeholder="করিম মিয়া"></div>
+        <div><label style="font-size:12px; font-weight:700">ফোন</label><input type="text" id="mPhone" placeholder="01XXXXXXXXX"></div>
+      </div>
+      <div class="form-grid" style="margin-top:12px">
+        <div><label style="font-size:12px; font-weight:700">WhatsApp নম্বর *</label><input type="text" id="mWhatsapp" placeholder="01XXXXXXXXX"></div>
+        <div><label style="font-size:12px; font-weight:700">🔑 Login Password (Admin fix)</label><input type="text" id="mPassword" placeholder="1234"></div>
+      </div>
+      <div style="margin-top:10px"><label style="font-size:12px; font-weight:700">নোট</label><input type="text" id="mNote" placeholder="ঐচ্ছিক"></div>
+      <p style="font-size:11px; color:var(--muted); margin-top:6px">💬 WhatsApp এ রিমাইন্ডার যাবে • 🔑 এই পাসওয়ার্ড দিয়ে সদস্য Offline Balance দেখবে (Admin fixed)</p>
+      <button class="btn btn-success" style="width:100%; margin-top:16px; justify-content:center" onclick="saveMember()">💾 সেভ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-head"><h3>⚙️ সমিতি সেটিংস</h3><button class="btn btn-ghost btn-sm" onclick="closeModal('settingsModal')">✕</button></div>
+    <div class="modal-body">
+      <div><label style="font-size:12px; font-weight:700">সমিতির নাম</label><input type="text" id="sName"></div>
+      <div style="background:#fdf2f8; padding:12px; border-radius:10px; border:1px solid #fbcfe8; margin-top:12px">
+        <b style="font-size:13px">📱 পেমেন্ট নম্বর (bKash / Nagad) - 01723291181</b>
+        <div class="form-grid" style="margin-top:8px">
+          <div><label style="font-size:11px; font-weight:700">bKash নম্বর</label><input type="text" id="sBkash" placeholder="01723291181"></div>
+          <div><label style="font-size:11px; font-weight:700">Nagad নম্বর</label><input type="text" id="sNagad" placeholder="01723291181"></div>
+        </div>
+        <div class="form-grid" style="margin-top:8px">
+          <div><label style="font-size:11px; font-weight:700">bKash Cash Out খরচ (৳)</label><input type="number" id="sBkashFee" placeholder="20"></div>
+          <div><label style="font-size:11px; font-weight:700">Nagad Cash Out খরচ (৳)</label><input type="number" id="sNagadFee" placeholder="20"></div>
+        </div>
+        <p style="font-size:11px; color:#be185d; margin-top:6px">⚠️ bKash/Nagad এ পাঠালে ক্যাশ আউট খরচ সহ পাঠাতে হবে। যেমন: ৫০০ + ২০ = ৫২০ টাকা</p>
+      </div>
+      <div class="form-grid" style="margin-top:12px">
+        <div><label style="font-size:12px; font-weight:700">প্রাথমিক জমা (৳)</label><input type="number" id="sInitial"></div>
+        <div><label style="font-size:12px; font-weight:700">মাসিক জমা (৳)</label><input type="number" id="sMonthly"></div>
+        <div><label style="font-size:12px; font-weight:700">ঋণ সুদ %</label><input type="number" id="sRate"></div>
+        <div><label style="font-size:12px; font-weight:700">মেয়াদ (মাস)</label><input type="number" id="sDuration"></div>
+        <div><label style="font-size:12px; font-weight:700">শুরুর তারিখ</label><input type="date" id="sStart"></div>
+        <div><label style="font-size:12px; font-weight:700">Admin পাসওয়ার্ড</label><input type="text" id="sPass"></div>
+        <div><label style="font-size:12px; font-weight:700">👤 সদস্যদের Fixed Password (Admin দেবে)</label><input type="text" id="sMemberPass" placeholder="1234"></div>
+      </div>
+      <div style="background:#fffbeb; padding:12px; border-radius:10px; border:1px solid #fde68a; margin-top:12px">
+        <b style="font-size:13px">📜 নিয়ম সেটিংস</b>
+        <div class="form-grid" style="margin-top:8px">
+          <div><label style="font-size:11px; font-weight:700">জমার শেষ তারিখ (১-১০)</label><input type="number" id="sFineDay" min="1" max="28" placeholder="10"></div>
+          <div><label style="font-size:11px; font-weight:700">জরিমানা টাকা</label><input type="number" id="sFineAmount" placeholder="30"></div>
+        </div>
+        <p style="font-size:11px; color:#92400e; margin-top:6px">১-১০ তারিখের পর জমা দিলে ৩০ টাকা জরিমানা অটো হবে।</p>
+      </div>
+      <div style="background:#ecfdf5; padding:12px; border-radius:10px; border:1px solid #a7f3d0; margin-top:12px">
+        <b style="font-size:13px">💬 WhatsApp Auto Reminder Message (৫-১০ তারিখ)</b>
+        <textarea id="sReminderMsg" rows="3" style="margin-top:8px; font-size:12px" placeholder="Message..."></textarea>
+        <p style="font-size:11px; color:var(--muted); margin-top:6px">Use: {name}, {somiti}, {month} - auto replace hobe</p>
+      </div>
+      <button class="btn btn-success" style="width:100%; margin-top:16px; justify-content:center" onclick="saveSettings()">✅ সেভ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Joma Modal -->
+<div class="modal-overlay" id="jomaModal">
+  <div class="modal">
+    <div class="modal-head"><h3>💰 কাস্টম জমা</h3><button class="btn btn-ghost btn-sm" onclick="closeModal('jomaModal')">✕</button></div>
+    <div class="modal-body">
+      <div><label style="font-size:12px; font-weight:700">সদস্য</label><select id="cjMember"></select></div>
+      <div style="margin-top:10px"><label style="font-size:12px; font-weight:700">পরিমাণ (৳)</label><input type="number" id="cjAmount" placeholder="500"></div>
+      <div style="margin-top:10px" class="form-grid"><div><label style="font-size:12px; font-weight:700">মাস</label><select id="cjMonth"></select></div><div><label style="font-size:12px; font-weight:700">তারিখ</label><input type="date" id="cjDate"></div></div>
+      <button class="btn btn-success" style="width:100%; margin-top:16px; justify-content:center" onclick="saveCustomJoma()">💾 জমা করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- Install Modal -->
+<div class="modal-overlay" id="installModal">
+  <div class="modal">
+    <div class="modal-head"><h3>📲 1 Click e Install korun</h3><button class="btn btn-ghost btn-sm" onclick="closeModal('installModal')">✕</button></div>
+    <div class="modal-body" style="font-size:13px; line-height:1.6">
+      <div style="background:#f0fdfa; padding:12px; border-radius:10px; border:1px solid var(--border); text-align:center">
+        <div style="font-weight:800; color:var(--primary)">লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি</div>
+        <div style="font-size:11px; color:var(--muted)">Offline App • Live Balance</div>
+      </div>
+      <div style="margin-top:14px">
+        <b>📱 Android (Chrome):</b>
+        <ol style="margin-left:18px; margin-top:6px; font-size:12px">
+          <li>Chrome e site open korun</li>
+          <li>Upore 3 dot (⋮) → <b>Install App</b> ba <b>Add to Home Screen</b></li>
+          <li><b>Install</b> din - App icon Home Screen e asbe</li>
+        </ol>
+      </div>
+      <div style="margin-top:12px">
+        <b>🍎 iPhone (Safari):</b>
+        <ol style="margin-left:18px; margin-top:6px; font-size:12px">
+          <li>Safari te link open korun</li>
+          <li>Nicher Share (⬆️) → <b>Add to Home Screen</b></li>
+          <li>Add din</li>
+        </ol>
+      </div>
+      <div style="margin-top:12px">
+        <b>💻 Laptop (Chrome/Edge):</b>
+        <ol style="margin-left:18px; margin-top:6px; font-size:12px">
+          <li>Address bar er dan e <b>Install (⊕)</b> icon e click</li>
+          <li>Install din - Desktop App hobe</li>
+        </ol>
+      </div>
+      <div style="background:#ecfdf5; padding:10px; border-radius:8px; margin-top:14px; font-size:11px; text-align:center; border:1px solid #a7f3d0">✅ Install korle net chara o cholbe • Live update auto</div>
+      <button class="btn btn-success" style="width:100%; margin-top:12px; justify-content:center" onclick="closeModal('installModal')">✅ Bujhechi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'somiti_20jon_2026_v3';
+let db = null;
+let isAdmin = false;
+const defaultNames = ["করিম মিয়া","রহিম উদ্দিন","আব্দুল জলিল","সালমা বেগম","নূরজাহান","আলমগীর হোসেন","ফাতেমা খাতুন","জাহাঙ্গীর আলম","রুবিনা আক্তার","মোঃ সোহেল","শাহিনুর বেগম","ইমরান হোসেন","আয়েশা সিদ্দিকা","মনির হোসেন","তাসলিমা বেগম","আরিফুল ইসলাম","খাদিজা বেগম","সাইফুল ইসলাম","মর্জিনা খাতুন","হাসান মাহমুদ"];
+
+function getDefaultDB(){
+  const start = "2026-01-01";
+  const members = defaultNames.map((n,i)=>({id:'m'+(i+1), name:n, phone:'01'+(700000000+i*123456).toString().slice(0,9), whatsapp:'01'+(700000000+i*123456).toString().slice(0,9), note:'', status:'active', photo:'', password:'1234'}));
+  return {
+    settings:{name:"লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি", initial:1000, monthly:500, rate:5, duration:60, start:start, pass:"admin123", memberPass:"1234", bkash:"01723291181", nagad:"01723291181", fineDay:10, fineAmount:30, bkashFee:20, nagadFee:20, cancelAfter:3, loanAdvance:true, logo:"images/logo.png", reminderMsg:"Assalamualaikum {name}, {somiti} er {month} maser 500 Taka jomar last date 10 tarikh. 10 tarikher por dile 30 Taka jorimana. bKash/Nagad: 01723291181 e 520 Taka (khoroch soho) pathan. Dhonnobad."},
+    members,
+    deposits:[],
+    loans:[],
+    fines:[]
+  };
+}
+
+function loadDB(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ db = JSON.parse(raw); }
+    else {
+      // migrate from v2 if exists
+      const old = localStorage.getItem('somiti_20jon_2026_v2');
+      if(old){ db=JSON.parse(old); db.fines=db.fines||[]; if(!db.settings.bkash) {db.settings.bkash="01700000000"; db.settings.nagad="01800000000"; db.settings.fineDay=10; db.settings.fineAmount=30;} saveDB(); }
+      else { db = getDefaultDB(); seedInitial(); saveDB(); }
+    }
+    if(!db.fines) db.fines=[];
+    if(!db.settings.bkash) db.settings.bkash="01723291181";
+    if(!db.settings.nagad) db.settings.nagad="01723291181";
+    if(db.settings.bkash==="01700000000") db.settings.bkash="01723291181";
+    if(db.settings.nagad==="01800000000") db.settings.nagad="01723291181";
+    if(!db.settings.bkashFee) db.settings.bkashFee=20;
+    if(!db.settings.nagadFee) db.settings.nagadFee=20;
+    if(!db.settings.fineDay) db.settings.fineDay=10;
+    if(!db.settings.fineAmount) db.settings.fineAmount=30;
+    if(!db.settings.reminderMsg) db.settings.reminderMsg="Assalamualaikum {name}, {somiti} er {month} maser 500 Taka jomar last date 10 tarikh. 10 tarikher por dile 30 Taka jorimana. bKash/Nagad: 01723291181 e 520 Taka (khoroch soho) pathan. Dhonnobad.";
+    if(!db.settings.cancelAfter) db.settings.cancelAfter=3;
+    if(db.settings.loanAdvance===undefined) db.settings.loanAdvance=true;
+    // force update to requested name/number
+    db.settings.bkash="01723291181"; db.settings.nagad="01723291181";
+    if(db.settings.name==="২০ জনা সমিতি" || db.settings.name==="20 Jona Somiti" || db.settings.name==="লুহুরিয়া পশ্চিমপাড় একতা সঞ্চয় সমিতি") db.settings.name="লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি";
+    db.settings.name="লুহুরিয়া পশ্চিমপাড়া একতা সঞ্চয় সমিতি";
+    if(!db.settings.logo) db.settings.logo="images/logo.png";
+    // migrate whatsapp numbers
+    db.members.forEach(m=>{ if(!m.whatsapp) m.whatsapp=m.phone; if(m.status===undefined) m.status='active'; if(m.photo===undefined) m.photo=''; if(!m.password) m.password=db.settings.memberPass||'1234'; });
+    if(!db.settings.memberPass) db.settings.memberPass='1234';
+  }catch(e){ db=getDefaultDB(); seedInitial(); }
+}
+
+function seedInitial(){
+  const today = db.settings.start;
+  db.members.forEach(m=>{
+    db.deposits.push({id:'d_'+m.id+'_init', memberId:m.id, amount:db.settings.initial, monthIdx:-1, date:today, type:'initial', method:'Cash'});
+  });
+}
+function saveDB(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); renderAll(); }
+function formatTaka(n){ return '৳ '+Number(n).toLocaleString('bn-BD'); }
+function formatTakaShort(n){ return '৳'+Number(n).toLocaleString('en-BD'); }
+
+function getMissedCount(memberId){
+  const start=new Date(db.settings.start);
+  const now=new Date();
+  let currentIdx=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+  if(currentIdx<0) currentIdx=0;
+  if(currentIdx>=db.settings.duration) currentIdx=db.settings.duration-1;
+  let missed=0;
+  for(let i=0;i<=currentIdx;i++){
+    if(!db.deposits.find(d=>d.memberId===memberId && d.monthIdx===i)) missed++;
+  }
+  return missed;
+}
+function isEligibleForProfit(memberId){
+  if(isCancelled(memberId)) return false;
+  return getMissedCount(memberId)===0;
+}
+function getConsecutiveMissed(memberId){
+  const start=new Date(db.settings.start);
+  const now=new Date();
+  let currentIdx=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+  if(currentIdx<0) currentIdx=0;
+  if(currentIdx>=db.settings.duration) currentIdx=db.settings.duration-1;
+  let maxConsecutive=0, cur=0;
+  for(let i=0;i<=currentIdx;i++){
+    if(!db.deposits.find(d=>d.memberId===memberId && d.monthIdx===i)) {cur++; maxConsecutive=Math.max(maxConsecutive,cur);}
+    else cur=0;
+  }
+  return maxConsecutive;
+}
+function isCancelled(memberId){
+  const m=db.members.find(x=>x.id===memberId);
+  if(m && m.status==='cancelled') return true;
+  if(getConsecutiveMissed(memberId) >= (db.settings.cancelAfter||3)) return true;
+  return false;
+}
+function hasOutstandingLoan(memberId){
+  return db.loans.some(l=> l.memberId===memberId && (l.amount + l.amount*l.rate/100 - (l.repayments||[]).reduce((a,b)=>a+b.amount,0) > 0));
+}
+function updateCancelledStatus(){
+  db.members.forEach(m=>{
+    if(m.status!=='cancelled' && getConsecutiveMissed(m.id) >= (db.settings.cancelAfter||3)){
+      m.status='cancelled';
+    }
+  });
+}
+function calcStats(){
+  const totalDeposit = db.deposits.reduce((a,b)=>a+b.amount,0);
+  const totalFines = db.fines.reduce((a,b)=>a+b.amount,0);
+  const totalLoanGiven = db.loans.reduce((a,b)=>a+b.amount,0);
+  let totalRepaid = 0, totalDue=0, totalProfit=0;
+  db.loans.forEach(l=>{
+    const repaid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0);
+    totalRepaid+=repaid;
+    const payable=l.amount + l.amount*l.rate/100;
+    totalDue+=Math.max(0,payable-repaid);
+    totalProfit+=Math.max(0, repaid - l.amount);
+  });
+  totalProfit+=totalFines;
+  const balance = totalDeposit + totalFines + totalRepaid - totalLoanGiven;
+  const avg = totalDeposit / db.members.length;
+  return {totalDeposit, totalFines, totalLoanGiven, totalRepaid, totalDue, totalProfit, balance, avg};
+}
+
+function renderPayBar(){
+  const s=db.settings;
+  const bar=document.getElementById('payBar');
+  let html='';
+  if(s.bkash) html+=`<div class="pay-pill" style="background:#e2136e; border-color:#e2136e"><span>📱 bKash</span> <b>${s.bkash}</b> <button class="copy-btn" onclick="copyNum('${s.bkash}')">Copy</button> <span style="font-size:10px">+${s.bkashFee||20}৳ খরচ</span></div>`;
+  if(s.nagad) html+=`<div class="pay-pill" style="background:#f59e0b; border-color:#f59e0b; color:#78350f"><span>📱 Nagad</span> <b>${s.nagad}</b> <button class="copy-btn" style="background:#78350f; color:white" onclick="copyNum('${s.nagad}')">Copy</button> <span style="font-size:10px">+${s.nagadFee||20}৳ খরচ</span></div>`;
+  html+=`<div class="pay-pill">⏰ ১-${s.fineDay} তারিখের মধ্যে জমা দিন, না হলে ${s.fineAmount}৳ জরিমানা</div>`;
+  html+=`<div class="pay-pill" style="background:#991b1b">🔒 ৫ বছরের আগে টাকা তোলা যাবে না</div>`;
+  bar.innerHTML=html;
+  // dash pay box
+  const dash=document.getElementById('payBoxDash');
+  if(dash){
+    const totalBkash = db.settings.monthly + (s.bkashFee||20);
+    const totalNagad = db.settings.monthly + (s.nagadFee||20);
+    dash.innerHTML=`
+      <div style="background:#fdf2f8; border:1px solid #fbcfe8; padding:14px; border-radius:12px; text-align:center">
+        <div style="font-size:12px; color:var(--muted); font-weight:700">bKash Personal</div>
+        <div style="font-size:20px; font-weight:800; color:var(--bkash); margin:4px 0">${s.bkash}</div>
+        <div style="background:white; padding:6px; border-radius:8px; font-size:12px; font-weight:700; border:1px dashed #f9a8d4">পাঠাবেন: <span style="color:var(--bkash)">${totalBkash}৳</span> <span style="font-weight:400; color:var(--muted)">(৫০০ + ${s.bkashFee||20} খরচ)</span></div>
+        <button class="btn btn-sm" style="background:var(--bkash); color:white; margin-top:8px" onclick="copyNum('${s.bkash}')">📋 কপি করুন</button>
+        <div style="font-size:11px; color:var(--muted); margin-top:6px">Send Money + খরচ সহ</div>
+      </div>
+      <div style="background:#fffbeb; border:1px solid #fde68a; padding:14px; border-radius:12px; text-align:center">
+        <div style="font-size:12px; color:var(--muted); font-weight:700">Nagad Personal</div>
+        <div style="font-size:20px; font-weight:800; color:#b45309; margin:4px 0">${s.nagad}</div>
+        <div style="background:white; padding:6px; border-radius:8px; font-size:12px; font-weight:700; border:1px dashed #fde68a">পাঠাবেন: <span style="color:#b45309">${totalNagad}৳</span> <span style="font-weight:400; color:var(--muted)">(৫০০ + ${s.nagadFee||20} খরচ)</span></div>
+        <button class="btn btn-sm" style="background:var(--nagad); color:white; margin-top:8px" onclick="copyNum('${s.nagad}')">📋 কপি করুন</button>
+        <div style="font-size:11px; color:var(--muted); margin-top:6px">Send Money + খরচ সহ</div>
+      </div>
+      <div style="background:#f0fdfa; border:1px solid var(--border); padding:14px; border-radius:12px">
+        <div style="font-size:13px; font-weight:700">📋 জমার নিয়ম</div>
+        <ul style="font-size:12px; margin-left:16px; margin-top:6px; line-height:1.8">
+          <li>💵 <b>Hate/Cash e 500 Taka</b> - sorasori treasurer ke</li>
+          <li>📱 bKash/Nagad e <b>খরচ সহ ${totalBkash}৳</b> (500+${s.bkashFee} fee)</li>
+          <li>১ - ${s.fineDay} তারিখের মধ্যে দিতে হবে</li>
+          <li>রেফারেন্সে নিজের নাম লিখুন</li>
+          <li>দেরি হলে <b>${s.fineAmount}৳ জরিমানা</b></li>
+          <li>৫ বছরের আগে টাকা তোলা যাবে না</li>
+        </ul>
+        <div style="margin-top:8px; background:#ecfdf5; padding:8px; border-radius:8px; font-size:11px; text-align:center; border:1px solid #a7f3d0">💡 Hate dile 500 Taka, bKash/Nagad e khoroch soho 520 Taka</div>
+      </div>`;
+  }
+  const rulePay=document.getElementById('rulePayNumbers');
+  if(rulePay) rulePay.innerHTML=`<span class="badge badge-success" style="background:var(--bkash); color:white">bKash: ${s.bkash} (+${s.bkashFee||20}৳)</span> <span class="badge badge-warning" style="background:var(--nagad); color:white">Nagad: ${s.nagad} (+${s.nagadFee||20}৳)</span>`;
+}
+function copyNum(num){
+  navigator.clipboard.writeText(num);
+  const t=document.getElementById('copyToast');
+  t.textContent='✅ '+num+' কপি করা হয়েছে';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+function renderKPIs(){
+  const s=calcStats();
+  document.getElementById('kpiBalance').textContent=formatTaka(s.balance);
+  document.getElementById('kpiJoma').textContent=formatTaka(s.totalDeposit);
+  document.getElementById('kpiJomaSub').textContent=`প্রাথমিক ${db.members.length*db.settings.initial} + মাসিক`;
+  document.getElementById('kpiLoanGiven').textContent=formatTaka(s.totalLoanGiven);
+  document.getElementById('kpiLoanCount').textContent=db.loans.length+' টি লোন';
+  document.getElementById('kpiProfit').textContent=formatTaka(s.totalProfit);
+  document.getElementById('kpiProfitSub').textContent=`ঋণ লাভ + জরিমানা ${formatTakaShort(s.totalFines)}`;
+  document.getElementById('kpiDue').textContent=formatTaka(s.totalDue);
+  document.getElementById('kpiFine').textContent=formatTaka(s.totalFines);
+  document.getElementById('kpiFineCount').textContent=db.fines.length+' টি জরিমানা';
+  document.getElementById('hdrName').textContent=db.settings.name;
+  document.getElementById('hdrSub').textContent=`৫ বছরের সঞ্চয় • মাসিক ${formatTakaShort(db.settings.monthly)} • লাভ ${db.settings.rate}% • 👥 ${db.members.length} জন • 🔒 ৫ বছর লক`;
+  const start=new Date(db.settings.start);
+  const end=new Date(start.getFullYear(), start.getMonth()+db.settings.duration-1, 1);
+  document.getElementById('startLabel').textContent='শুরু: '+start.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+  document.getElementById('endLabel').textContent='শেষ: '+end.toLocaleDateString('bn-BD',{month:'long', year:'numeric'})+' (ফেরত)';
+  const now=new Date();
+  let monthsPassed=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+  if(monthsPassed<0) monthsPassed=0;
+  if(monthsPassed>db.settings.duration) monthsPassed=db.settings.duration;
+  const pct=Math.round((monthsPassed/db.settings.duration)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressPct').textContent=pct+'% সম্পন্ন';
+  document.getElementById('progressText').textContent=`মাস ${Math.min(monthsPassed+1, db.settings.duration)} / ${db.settings.duration} • ${now.toLocaleDateString('bn-BD',{month:'long', year:'numeric'})}`;
+  document.getElementById('lockInfo').textContent=`• 🔒 ${db.settings.duration*1 - monthsPassed} মাস বাকি (তোলা যাবে না)`;
+  renderPayBar();
+}
+
+function renderRecent(){
+  let tx=[];
+  db.deposits.forEach(d=> tx.push({date:d.date, type:'joma', amount:d.amount, memberId:d.memberId, desc:d.type==='initial'?'প্রাথমিক জমা':'মাসিক জমা'}));
+  db.fines.forEach(f=> tx.push({date:f.date, type:'fine', amount:f.amount, memberId:f.memberId, desc:'জরিমানা'}));
+  db.loans.forEach(l=> tx.push({date:l.date, type:'loan', amount:l.amount, memberId:l.memberId, desc:'ঋণ বিতরণ'}));
+  db.loans.forEach(l=> (l.repayments||[]).forEach(r=> tx.push({date:r.date, type:'repay', amount:r.amount, memberId:l.memberId, desc:'ঋণ ফেরত'})));
+  tx.sort((a,b)=> new Date(b.date)-new Date(a.date));
+  const wrap=document.getElementById('recentTx');
+  if(tx.length===0){ wrap.innerHTML='<div class="empty">কোনো লেনদেন নেই</div>'; return; }
+  wrap.innerHTML=tx.slice(0,5).map(t=>{
+    const m=db.members.find(x=>x.id===t.memberId);
+    const icon=t.type==='joma'?'💰': t.type==='fine'?'⚠️': t.type==='loan'?'🏦':'✅';
+    const color=t.type==='joma'?'#0f766e': t.type==='fine'?'#92400e': t.type==='loan'?'#dc2626':'#059669';
+    return `<div style="display:flex; gap:10px; align-items:center; padding:8px 0; border-bottom:1px solid #f1f5f9">
+      <div style="width:32px;height:32px; border-radius:50%; background:${color}; color:white; display:flex; align-items:center; justify-content:center; font-size:14px">${icon}</div>
+      <div style="flex:1"><div style="font-size:13px; font-weight:700">${m?m.name:'-'} • ${t.desc}</div><div style="font-size:11px; color:var(--muted)">${t.date}</div></div>
+      <div style="font-weight:800; color:${color}">${t.type==='loan'?'-':'+'}${formatTakaShort(t.amount)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderTopSavers(){
+  const totals={}; db.deposits.forEach(d=> totals[d.memberId]=(totals[d.memberId]||0)+d.amount);
+  const sorted=Object.entries(totals).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const wrap=document.getElementById('topSavers');
+  wrap.innerHTML=sorted.map(([mid,amt],i)=>{
+    const m=db.members.find(x=>x.id===mid);
+    const eligible=isEligibleForProfit(mid);
+    const avatar = m.photo ? `<img src="${m.photo}" style="width:32px; height:32px; border-radius:50%; object-fit:cover; border:2px solid ${eligible?'#0f766e':'#fecaca'}">` : `<div class="avatar" style="width:32px;height:32px; font-size:12px">${m.name.charAt(0)}</div>`;
+    return `<div style="display:flex; gap:10px; align-items:center; padding:8px 0; border-bottom:1px solid #f1f5f9">
+      <div style="width:28px; text-align:center; font-weight:800; color:var(--primary)">#${i+1}</div>
+      ${avatar}
+      <div style="flex:1"><div style="font-size:13px; font-weight:700">${m.name} ${eligible?'':'<span style="color:red; font-size:10px"> (লাভ পাবে না)</span>'}</div><div style="font-size:11px; color:var(--muted)">${m.phone}</div></div>
+      <div style="font-weight:800">${formatTakaShort(amt)}</div>
+    </div>`;
+  }).join('')||'<div class="empty">তথ্য নেই</div>';
+}
+
+function renderMembers(){
+  const q=(document.getElementById('memberSearch').value||'').toLowerCase();
+  const tbody=document.getElementById('memberTable');
+  const totals={}; db.deposits.forEach(d=> totals[d.memberId]=(totals[d.memberId]||0)+d.amount);
+  const fineTotals={}; db.fines.forEach(f=> fineTotals[f.memberId]=(fineTotals[f.memberId]||0)+f.amount);
+  const loanGiven={}; const repaid={};
+  db.loans.forEach(l=>{ loanGiven[l.memberId]=(loanGiven[l.memberId]||0)+l.amount; repaid[l.memberId]=(repaid[l.memberId]||0)+(l.repayments||[]).reduce((a,b)=>a+b.amount,0); });
+  let filtered=db.members.filter(m=> !q || m.name.toLowerCase().includes(q) || m.phone.includes(q) || (m.whatsapp||'').includes(q));
+  tbody.innerHTML=filtered.map((m,i)=>{
+    const tj=totals[m.id]||0;
+    const fine=fineTotals[m.id]||0;
+    const lg=loanGiven[m.id]||0;
+    const due=(()=>{let d=0; db.loans.filter(x=>x.memberId===m.id).forEach(l=>{const payable=l.amount+l.amount*l.rate/100; const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0); d+=Math.max(0,payable-paid)}); return d;})();
+    const missed=getMissedCount(m.id);
+    const consecutive=getConsecutiveMissed(m.id);
+    const cancelled=isCancelled(m.id);
+    const eligible=isEligibleForProfit(m.id);
+    const wa = m.whatsapp||m.phone;
+    const waBtn = `<a href="https://wa.me/88${wa.replace(/\D/g,'').slice(-11)}?text=${encodeURIComponent('Hi '+m.name)}" target="_blank" style="font-size:11px; color:#25D366; font-weight:700; text-decoration:none">💬 ${wa}</a>`;
+    let statusBadge = cancelled?'<span class="badge badge-danger">🚫 বাতিল</span>': eligible?'<span class="badge badge-success">✅ লাভ পাবে</span>':'<span class="badge badge-warning">⚠️ শুধু আসল</span>';
+    if(cancelled) statusBadge+='<div style="font-size:10px; color:red">৩ মাস টানা মিস</div>';
+    const avatarHtml = m.photo ? `<img src="${m.photo}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid ${cancelled?'#991b1b':'var(--primary)'}">` : `<div class="avatar" style="background:${cancelled?'#991b1b':''}">${m.name.charAt(0)}</div>`;
+    return `<tr style="${cancelled?'background:#fee2e2; opacity:0.7': !eligible?'background:#fef2f2':''}">
+      <td>${i+1}</td>
+      <td><div style="display:flex; gap:8px; align-items:center">${avatarHtml}<div><div style="font-weight:700">${m.name} ${cancelled?'<span style="color:red; font-size:10px"> (বাতিল)</span>':''}</div><div style="font-size:11px; color:var(--muted)">${m.phone} ${consecutive>=2?'<span style="color:orange">• ⚠️ '+consecutive+' মাস টানা মিস</span>':''}</div></div></div></td>
+      <td>${waBtn}<div style="margin-top:4px"><button class="btn btn-ghost btn-sm" style="padding:2px 6px; font-size:10px; background:#25D366; color:white; border:none" onclick="sendReminderTo('${m.id}')">💬 মেসেজ</button></div></td>
+      <td style="font-weight:800; color:var(--primary)">${formatTakaShort(tj)}</td>
+      <td style="color:${fine>0?'var(--danger)':'var(--muted)'}; font-weight:700">${fine>0?formatTakaShort(fine):'-'}</td>
+      <td><span class="badge ${cancelled?'badge-danger':missed>0?'badge-warning':'badge-success'}">${cancelled?'🚫 '+consecutive+' মাস': missed===0?'✅ 0 টি':'⚠️ '+missed+' মাস'}</span></td>
+      <td>${formatTakaShort(lg)} <span style="font-size:11px; color:var(--danger)">/ ${formatTakaShort(due)}</span></td>
+      <td>${statusBadge}</td>
+      <td><div style="display:flex; gap:4px">${isAdmin?`<button class="btn btn-ghost btn-sm" onclick="editMember('${m.id}')">✏️</button>`:''}<button class="btn btn-ghost btn-sm" onclick="viewPersonal('${m.id}')">👁️</button></div></td>
+    </tr>`;
+  }).join('');
+  populateSelects();
+}
+
+function populateSelects(){
+  const opts=db.members.map(m=>`<option value="${m.id}">${m.name} (${m.phone})</option>`).join('');
+  ['loanMember','cjMember','personalSelect'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){ const cur=el.value; el.innerHTML=opts; if(cur) el.value=cur; }
+  });
+  const rSel=document.getElementById('repayLoanSelect');
+  if(rSel){
+    const cur=rSel.value;
+    rSel.innerHTML=db.loans.map(l=>{
+      const m=db.members.find(x=>x.id===l.memberId);
+      const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0);
+      const payable=l.amount+l.amount*l.rate/100;
+      const due=payable-paid;
+      return `<option value="${l.id}">${m?m.name:'-'} - ${formatTakaShort(l.amount)} (বকেয়া ${formatTakaShort(due)}) - ${l.date}</option>`;
+    }).join('')||'<option>কোনো ঋণ নেই</option>';
+    if(cur) rSel.value=cur;
+  }
+  const jSel=document.getElementById('jomaMonthSelect');
+  if(jSel && jSel.options.length===0){
+    const months=[]; const start=new Date(db.settings.start);
+    for(let i=0;i<db.settings.duration;i++){
+      const d=new Date(start.getFullYear(), start.getMonth()+i, 1);
+      const label=d.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+      months.push(`<option value="${i}">${label}</option>`);
+    }
+    jSel.innerHTML=months.join('');
+    const now=new Date(); let idx=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+    if(idx<0) idx=0; if(idx>=db.settings.duration) idx=db.settings.duration-1;
+    jSel.value=idx;
+  }
+  const cjMonth=document.getElementById('cjMonth');
+  if(cjMonth && cjMonth.options.length===0){
+    const start=new Date(db.settings.start);
+    let optsM='<option value="-1">প্রাথমিক জমা</option>';
+    for(let i=0;i<db.settings.duration;i++){
+      const d=new Date(start.getFullYear(), start.getMonth()+i,1);
+      optsM+=`<option value="${i}">${d.toLocaleDateString('bn-BD',{month:'long', year:'numeric'})}</option>`;
+    }
+    cjMonth.innerHTML=optsM;
+  }
+}
+
+function renderJoma(){
+  const sel=document.getElementById('jomaMonthSelect');
+  if(!sel) return;
+  const monthIdx=parseInt(sel.value);
+  const start=new Date(db.settings.start);
+  const monthDate=new Date(start.getFullYear(), start.getMonth()+monthIdx,1);
+  const monthLabel=monthDate.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+  const payDateVal=document.getElementById('jomaPayDate').value;
+  const payDay=payDateVal? new Date(payDateVal).getDate(): 15;
+  const isLate=payDay > db.settings.fineDay;
+  const hint=document.getElementById('jomaDateHint');
+  if(hint) hint.innerHTML=isLate?`<span style="color:var(--danger); font-weight:700">⚠️ ${payDay} তারিখ → ${db.settings.fineAmount}৳ জরিমানা যোগ হবে</span>`:`<span style="color:var(--success)">✅ ${payDay} তারিখ - সময়মত</span>`;
+
+  const monthDeposits=db.deposits.filter(d=>d.monthIdx===monthIdx);
+  const monthFines=db.fines.filter(f=>f.monthIdx===monthIdx);
+  const totalThisMonth=monthDeposits.reduce((a,b)=>a+b.amount,0);
+  const totalFineThisMonth=monthFines.reduce((a,b)=>a+b.amount,0);
+  const paidCount=new Set(monthDeposits.map(d=>d.memberId)).size;
+  const summaryEl=document.getElementById('jomaSummary');
+  summaryEl.innerHTML=`<b>${monthLabel}</b> — জমা দিয়েছে <b>${paidCount}/${db.members.length}</b> জন • মোট <b>${formatTaka(totalThisMonth)}</b> ${totalFineThisMonth?`+ জরিমানা ${formatTaka(totalFineThisMonth)}`:''} • বাকি <b>${db.members.length-paidCount} জন</b> ${paidCount===db.members.length?'✅ সম্পন্ন':''}`;
+  summaryEl.className=paidCount===db.members.length?'alert alert-success':'alert alert-info';
+
+  const payInfo=document.getElementById('jomaPayInfo');
+  if(payInfo){
+    const method=document.getElementById('jomaMethod').value;
+    const s=db.settings;
+    const num=method==='bKash'?s.bkash: method==='Nagad'?s.nagad:'Cash';
+    const fee = method==='bKash'? (s.bkashFee||20) : method==='Nagad'? (s.nagadFee||20):0;
+    const totalSend = s.monthly + fee;
+    payInfo.innerHTML=`<span>💳 মাধ্যম: <b>${method}</b> ${num!=='Cash'?`(${num})`:''}</span> <span>📅 তারিখ: <b>${payDateVal||'নির্বাচন করুন'}</b></span> <span style="background:${fee?'#fef2f2':'#ecfdf5'}; padding:4px 8px; border-radius:999px; border:1px solid ${fee?'#fecaca':'#a7f3d0'}">💰 পাঠাতে হবে: <b>${fee? totalSend+'৳ (৫০০+'+fee+' খরচ)':'৫০০৳ Cash'}</b></span> <span>⏰ ১-${s.fineDay} তাং, দেরি ${s.fineAmount}৳ জরিমানা</span>`;
+  }
+
+  const totals={}; db.deposits.forEach(d=> totals[d.memberId]=(totals[d.memberId]||0)+d.amount);
+  const tbody=document.getElementById('jomaTable');
+  tbody.innerHTML=db.members.map((m,i)=>{
+    const has=db.deposits.find(d=>d.memberId===m.id && d.monthIdx===monthIdx);
+    const fine=db.fines.find(f=>f.memberId===m.id && f.monthIdx===monthIdx);
+    const total=totals[m.id]||0;
+    const missed=getMissedCount(m.id);
+    return `<tr>
+      <td>${i+1}</td>
+      <td><b>${m.name}</b><div style="font-size:11px; color:var(--muted)">${m.phone} ${missed>0?'<span style="color:red">• '+missed+' মাস মিস</span>':''}</div></td>
+      <td>${has?`<span class="badge badge-success">✅ ${formatTakaShort(has.amount)} ${has.method? '('+has.method+')':''}</span> ${fine?`<span class="badge badge-danger">⚠️ জরিমানা ${formatTakaShort(fine.amount)}</span>`:''}`:`<span class="badge badge-warning">⏳ বাকি ${formatTakaShort(db.settings.monthly)}</span>`}</td>
+      <td style="font-weight:800">${formatTakaShort(total)}</td>
+      <td><span class="badge ${missed>0?'badge-danger':'badge-success'}">${missed>0?missed+' টি': '0'}</span></td>
+      <td>${isAdmin? (has?`<button class="btn btn-ghost btn-sm" onclick="removeJoma('${has.id}')">❌ বাতিল</button>`:`<button class="btn btn-success btn-sm" onclick="payJoma('${m.id}', ${monthIdx})">💰 জমা নিন</button>`) : (has?'✔️':'—')}</td>
+    </tr>`;
+  }).join('');
+
+  const reportBody=document.getElementById('monthlyReport');
+  if(reportBody){
+    let rows='';
+    for(let i=0;i<db.settings.duration;i++){
+      const md=new Date(start.getFullYear(), start.getMonth()+i,1);
+      const deps=db.deposits.filter(d=>d.monthIdx===i);
+      const fines=db.fines.filter(f=>f.monthIdx===i);
+      const cnt=new Set(deps.map(d=>d.memberId)).size;
+      const amt=deps.reduce((a,b)=>a+b.amount,0);
+      const fineAmt=fines.reduce((a,b)=>a+b.amount,0);
+      if(i> (new Date().getMonth()-start.getMonth()+6)) break;
+      if(i<12 || cnt>0 || i===monthIdx){
+        rows+=`<tr><td>${md.toLocaleDateString('bn-BD',{month:'long', year:'numeric'})}</td><td>${cnt}/${db.members.length}</td><td style="font-weight:700; color:var(--success)">${formatTakaShort(amt)}</td><td style="color:var(--danger)">${fineAmt?formatTakaShort(fineAmt):'-'}</td><td style="color:${cnt===db.members.length?'var(--success)':'var(--danger)'}">${cnt===db.members.length?'✅ সম্পন্ন': (db.members.length-cnt)+' বাকি'}</td></tr>`;
+      }
+    }
+    reportBody.innerHTML=rows;
+  }
+}
+
+function payJoma(memberId, monthIdx){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  const exists=db.deposits.find(d=>d.memberId===memberId && d.monthIdx===monthIdx);
+  if(exists) return alert('এই মাসের জমা ইতিমধ্যে নেওয়া হয়েছে');
+  const payDate=document.getElementById('jomaPayDate').value;
+  if(!payDate) return alert('জমার তারিখ নির্বাচন করুন');
+  const method=document.getElementById('jomaMethod').value;
+  const day=new Date(payDate).getDate();
+  const isLate=day > db.settings.fineDay;
+  db.deposits.push({id:'d_'+Date.now(), memberId, amount:db.settings.monthly, monthIdx, date:payDate, type:'monthly', method});
+  if(isLate){
+    db.fines.push({id:'f_'+Date.now(), memberId, amount:db.settings.fineAmount, monthIdx, date:payDate, reason:`দেরিতে জমা (${day} তারিখ)`});
+    alert(`জমা নেওয়া হয়েছে + ${db.settings.fineAmount}৳ জরিমানা যোগ হয়েছে (দেরিতে জমা: ${day} তারিখ)`);
+  } else {
+    alert('জমা সফলভাবে নেওয়া হয়েছে');
+  }
+  saveDB();
+}
+function removeJoma(depositId){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  if(!confirm('এই জমা বাতিল করবেন? সংশ্লিষ্ট জরিমানাও মুছে যাবে')) return;
+  const dep=db.deposits.find(d=>d.id===depositId);
+  db.deposits=db.deposits.filter(d=>d.id!==depositId);
+  if(dep) db.fines=db.fines.filter(f=> !(f.memberId===dep.memberId && f.monthIdx===dep.monthIdx));
+  saveDB();
+}
+function markAllPaid(){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  const payDate=document.getElementById('jomaPayDate').value;
+  if(!payDate) return alert('তারিখ নির্বাচন করুন');
+  const method=document.getElementById('jomaMethod').value;
+  const monthIdx=parseInt(document.getElementById('jomaMonthSelect').value);
+  const day=new Date(payDate).getDate();
+  const isLate=day > db.settings.fineDay;
+  let added=0;
+  db.members.forEach(m=>{
+    if(!db.deposits.find(d=>d.memberId===m.id && d.monthIdx===monthIdx)){
+      db.deposits.push({id:'d_'+Date.now()+'_'+m.id, memberId:m.id, amount:db.settings.monthly, monthIdx, date:payDate, type:'monthly', method});
+      if(isLate) db.fines.push({id:'f_'+Date.now()+'_'+m.id, memberId:m.id, amount:db.settings.fineAmount, monthIdx, date:payDate, reason:`দেরিতে জমা (${day} তারিখ)`});
+      added++;
+    }
+  });
+  if(added===0) alert('সবার জমা ইতিমধ্যে নেওয়া হয়েছে');
+  else alert(`${added} জনের জমা নেওয়া হয়েছে ${isLate?`+ জরিমানা ${db.settings.fineAmount}৳ করে`:''}`);
+  saveDB();
+}
+function addCustomJoma(){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  document.getElementById('cjMember').value=db.members[0].id;
+  document.getElementById('cjAmount').value=db.settings.monthly;
+  document.getElementById('cjDate').value=new Date().toISOString().slice(0,10);
+  openModal('jomaModal');
+}
+function saveCustomJoma(){
+  const memberId=document.getElementById('cjMember').value;
+  const amount=parseInt(document.getElementById('cjAmount').value);
+  const monthIdx=parseInt(document.getElementById('cjMonth').value);
+  const date=document.getElementById('cjDate').value;
+  if(!amount || amount<=0) return alert('সঠিক পরিমাণ দিন');
+  const method=document.getElementById('jomaMethod').value;
+  db.deposits.push({id:'d_'+Date.now(), memberId, amount, monthIdx, date, type:'custom', method});
+  const day=new Date(date).getDate();
+  if(monthIdx>=0 && day > db.settings.fineDay){
+    db.fines.push({id:'f_'+Date.now(), memberId, amount:db.settings.fineAmount, monthIdx, date, reason:`দেরিতে জমা (${day} তারিখ)`});
+  }
+  closeModal('jomaModal');
+  saveDB();
+  alert('জমা যোগ হয়েছে');
+}
+
+function giveLoan(){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  const memberId=document.getElementById('loanMember').value;
+  const amount=parseInt(document.getElementById('loanAmount').value);
+  const rate=parseFloat(document.getElementById('loanRate').value)||5;
+  const date=document.getElementById('loanDate').value;
+  const note=document.getElementById('loanNote').value;
+  const advanceChecked=document.getElementById('advanceCheck')?.checked;
+  if(!amount || amount<=0) return alert('পরিমাণ দিন');
+  if(!date) return alert('তারিখ দিন');
+  const member=db.members.find(x=>x.id===memberId);
+  if(isCancelled(memberId)) return alert('🚫 এই সদস্যের সদস্যপদ বাতিল (৩ মাস টানা মিস) - ঋণ দেওয়া যাবে না');
+  if(hasOutstandingLoan(memberId)) return alert('⚠️ এই সদস্যের একটি ঋণ বাকি আছে - ১ টা ঋণ থাকতে আরেকটা নয়। আগে আগেরটা পরিশোধ করুন');
+  if(!advanceChecked) return alert('⚠️ ১ মাসের লাভ অগ্রিম নিতে হবে - টিক দিন');
+  const stats=calcStats();
+  if(amount > stats.balance) return alert(`পর্যাপ্ত ক্যাশ নেই। ব্যালেন্স ${formatTaka(stats.balance)}`);
+  // advance profit
+  const advance = Math.round(amount * rate / 100);
+  // add loan
+  db.loans.push({id:'l_'+Date.now(), memberId, amount, rate, date, note, advancePaid:advance, repayments:[]});
+  // collect advance immediately as profit
+  if(advance>0){
+    db.fines.push({id:'f_adv_'+Date.now(), memberId, amount:advance, monthIdx:-2, date:date, reason:`ঋণের অগ্রিম লাভ ${rate}% - ${formatTakaShort(amount)} এর`});
+  }
+  saveDB();
+  document.getElementById('loanAmount').value='';
+  document.getElementById('loanNote').value='';
+  alert(`ঋণ দেওয়া হয়েছে ✅\nপরিমাণ: ${formatTaka(amount)}\nঅগ্রিম লাভ আদায়: ${formatTaka(advance)} (ফান্ডে জমা)\nনেট ক্যাশ আউট: ${formatTaka(amount)} (সিরিয়াল অনুযায়ী)`);
+  checkLoanQueue();
+}
+function checkLoanQueue(){
+  // show warnings
+  const el=document.getElementById('loanWarnings');
+  if(!el) return;
+  const pendingLoans=db.loans.filter(l=> (l.amount + l.amount*l.rate/100 - (l.repayments||[]).reduce((a,b)=>a+b.amount,0) >0));
+  if(pendingLoans.length>0){
+    el.innerHTML=`<div style="background:#fef2f2; border:1px solid #fecaca; padding:8px; border-radius:8px; font-size:11px; color:#991b1b">⚠️ বর্তমানে ${pendingLoans.length} টি ঋণ বকেয়া আছে। সিরিয়ালে যে আগে চেয়েছে তাকে আগে দিতে হবে। একই সদস্য ২য় ঋণ পাবে না।</div>`;
+  } else el.innerHTML='';
+}
+function updateLoanPreview(){
+  const amt=parseInt(document.getElementById('loanAmount').value)||0;
+  const rate=parseFloat(document.getElementById('loanRate').value)||5;
+  const interest=Math.round(amt*rate/100);
+  const total=amt+interest;
+  const el=document.getElementById('loanPreview');
+  if(!el) return;
+  if(!amt){ el.innerHTML='প্রিভিউ: পরিমাণ লিখুন'; return; }
+  // check member advance
+  const memberId=document.getElementById('loanMember')?.value;
+  let warn='';
+  if(memberId && isCancelled(memberId)) warn='<div style="color:red; margin-top:6px">🚫 এই সদস্য বাতিল - ঋণ নয়</div>';
+  else if(memberId && hasOutstandingLoan(memberId)) warn='<div style="color:red; margin-top:6px">⚠️ ইতিমধ্যে একটি ঋণ বাকি - নতুন নয়</div>';
+  el.innerHTML=`💡 হিসাব: <b>${formatTakaShort(amt)}</b> + ${rate}% লাভ <b>${formatTakaShort(interest)}</b> = মোট ফেরত <b style="color:var(--success)">${formatTakaShort(total)}</b><div style="background:#eff6ff; padding:6px; border-radius:6px; margin-top:6px; border:1px dashed #bfdbfe">✅ অগ্রিম জমা: <b>${formatTakaShort(interest)}</b> - ঋণ দেওয়ার সময় নগদ নিতে হবে</div>${warn}`;
+}
+function repayLoan(){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  const loanId=document.getElementById('repayLoanSelect').value;
+  const amount=parseInt(document.getElementById('repayAmount').value);
+  const date=document.getElementById('repayDate').value || new Date().toISOString().slice(0,10);
+  if(!loanId) return alert('ঋণ নির্বাচন করুন');
+  if(!amount || amount<=0) return alert('পরিমাণ দিন');
+  const loan=db.loans.find(l=>l.id===loanId);
+  const paid=(loan.repayments||[]).reduce((a,b)=>a+b.amount,0);
+  const payable=loan.amount+loan.amount*loan.rate/100;
+  const due=payable-paid;
+  if(amount>due) return alert(`বকেয়া ${formatTaka(due)} এর বেশি না`);
+  loan.repayments.push({amount, date});
+  saveDB();
+  document.getElementById('repayAmount').value='';
+  alert('ফেরত জমা হয়েছে');
+}
+function updateRepayPreview(){
+  const loanId=document.getElementById('repayLoanSelect').value;
+  const loan=db.loans.find(l=>l.id===loanId);
+  const el=document.getElementById('repayPreview');
+  if(!loan){ el.textContent='একটি ঋণ নির্বাচন করুন'; return; }
+  const m=db.members.find(x=>x.id===loan.memberId);
+  const paid=(loan.repayments||[]).reduce((a,b)=>a+b.amount,0);
+  const interest=loan.amount*loan.rate/100;
+  const payable=loan.amount+interest;
+  const due=payable-paid;
+  el.innerHTML=`<b>${m.name}</b> • ঋণ ${formatTakaShort(loan.amount)} + লাভ ${formatTakaShort(interest)} = <b>${formatTakaShort(payable)}</b><br>পরিশোধ: ${formatTakaShort(paid)} • <span style="color:var(--danger); font-weight:800">বকেয়া: ${formatTakaShort(due)}</span>`;
+}
+document.getElementById('loanAmount')?.addEventListener('input', ()=>{checkLoanQueue(); updateLoanPreview();});
+document.getElementById('loanRate')?.addEventListener('input', ()=>{checkLoanQueue(); updateLoanPreview();});
+document.getElementById('loanMember')?.addEventListener('change', ()=>{checkLoanQueue(); updateLoanPreview();});
+function renderLoans(){
+  const filter=document.getElementById('loanFilter').value;
+  const tbody=document.getElementById('loanTable');
+  let list=[...db.loans].sort((a,b)=> new Date(b.date)-new Date(a.date));
+  if(filter==='due') list=list.filter(l=>{const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0); return (l.amount+l.amount*l.rate/100 - paid)>0});
+  if(filter==='paid') list=list.filter(l=>{const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0); return (l.amount+l.amount*l.rate/100 - paid)<=0});
+  tbody.innerHTML=list.map((l,i)=>{
+    const m=db.members.find(x=>x.id===l.memberId);
+    const interest=l.amount*l.rate/100;
+    const payable=l.amount+interest;
+    const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0);
+    const due=payable-paid;
+    const isPaid=due<=0;
+    return `<tr><td>${i+1}</td><td><b>${m?m.name:'-'}</b><div style="font-size:11px; color:var(--muted)">${l.note||''}</div></td><td>${formatTakaShort(l.amount)}</td><td style="color:var(--success)">${formatTakaShort(interest)}</td><td style="font-weight:800">${formatTakaShort(payable)}</td><td style="color:var(--success)">${formatTakaShort(paid)}</td><td style="color:${isPaid?'var(--success)':'var(--danger)'}; font-weight:800">${formatTakaShort(due)}</td><td style="font-size:11px">${l.date}</td><td><span class="badge ${isPaid?'badge-success':'badge-danger'}">${isPaid?'পরিশোধিত':'বকেয়া'}</span></td><td>${isAdmin?`<button class="btn btn-ghost btn-sm" onclick="deleteLoan('${l.id}')">🗑️</button>`:''}</td></tr>`;
+  }).join('')||'<tr><td colspan="10" class="empty">কোনো ঋণ নেই</td></tr>';
+  updateRepayPreview();
+}
+function deleteLoan(id){ if(!isAdmin) return alert('Admin লগইন প্রয়োজন'); if(!confirm('ঋণ মুছবেন?')) return; db.loans=db.loans.filter(l=>l.id!==id); saveDB(); }
+
+function renderLedger(){
+  const filter=document.getElementById('ledgerFilter').value;
+  let tx=[];
+  db.deposits.forEach(d=>{
+    const m=db.members.find(x=>x.id===d.memberId);
+    tx.push({date:d.date, type:'joma', member:m?m.name:'-', desc: d.type==='initial'?'প্রাথমিক জমা':('জমা - মাস '+(d.monthIdx+1)+' '+ (d.method||'') ), amount:d.amount});
+  });
+  db.fines.forEach(f=>{
+    const m=db.members.find(x=>x.id===f.memberId);
+    tx.push({date:f.date, type:'fine', member:m?m.name:'-', desc:'জরিমানা - '+f.reason, amount:f.amount});
+  });
+  db.loans.forEach(l=>{
+    const m=db.members.find(x=>x.id===l.memberId);
+    tx.push({date:l.date, type:'loan', member:m?m.name:'-', desc:'ঋণ বিতরণ - '+(l.note||''), amount:-l.amount});
+  });
+  db.loans.forEach(l=> (l.repayments||[]).forEach(r=>{
+    const m=db.members.find(x=>x.id===l.memberId);
+    tx.push({date:r.date, type:'repay', member:m?m.name:'-', desc:'ঋণ ফেরত', amount:r.amount});
+  }));
+  tx.sort((a,b)=> new Date(a.date)-new Date(b.date));
+  let bal=0; tx=tx.map(t=>{bal+=t.amount; return {...t, balance:bal}});
+  tx.reverse();
+  if(filter!=='all') tx=tx.filter(t=> t.type===filter);
+  const tbody=document.getElementById('ledgerTable');
+  tbody.innerHTML=tx.map(t=>{
+    const badge=t.type==='joma'?'<span class="badge badge-success">জমা</span>': t.type==='fine'?'<span class="badge badge-danger">জরিমানা</span>': t.type==='loan'?'<span class="badge badge-danger">ঋণ</span>':'<span class="badge badge-info">ফেরত</span>';
+    return `<tr><td style="white-space:nowrap">${t.date}</td><td>${badge}</td><td>${t.member}</td><td style="font-size:12px">${t.desc}</td><td style="font-weight:800; color:${t.amount>0?'var(--success)':'var(--danger)'}">${t.amount>0?'+':''}${formatTakaShort(t.amount)}</td><td style="font-weight:800">${formatTakaShort(t.balance)}</td></tr>`;
+  }).join('')||'<tr><td colspan="6" class="empty">কোনো লেনদেন নেই</td></tr>';
+}
+
+function renderPersonal(){
+  const mid=document.getElementById('personalSelect').value;
+  const m=db.members.find(x=>x.id===mid);
+  if(!m) return;
+  const deposits=db.deposits.filter(d=>d.memberId===mid);
+  const fines=db.fines.filter(f=>f.memberId===mid);
+  const totalJoma=deposits.reduce((a,b)=>a+b.amount,0);
+  const totalFine=fines.reduce((a,b)=>a+b.amount,0);
+  const loans=db.loans.filter(l=>l.memberId===mid);
+  const loanGiven=loans.reduce((a,b)=>a+b.amount,0);
+  const totalRepaid=loans.reduce((a,b)=>a+ (b.repayments||[]).reduce((x,y)=>x+y.amount,0),0);
+  let due=0; loans.forEach(l=>{const payable=l.amount+l.amount*l.rate/100; const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0); due+=Math.max(0,payable-paid)});
+  const missed=getMissedCount(mid);
+  const consecutive=getConsecutiveMissed(mid);
+  const cancelled=isCancelled(mid);
+  const eligible=isEligibleForProfit(mid);
+  const start=new Date(db.settings.start);
+  const profilePic = m.photo ? `<img src="${m.photo}" style="width:70px; height:70px; border-radius:50%; object-fit:cover; border:3px solid ${cancelled?'#991b1b':'#0f766e'}; box-shadow:0 4px 12px rgba(0,0,0,0.1)">` : `<div class="avatar" style="width:56px;height:56px; font-size:20px; background:${cancelled?'#991b1b':''}">${m.name.charAt(0)}</div>`;
+  document.getElementById('personalCard').innerHTML=`
+    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; background:${cancelled?'#fee2e2': eligible?'#f0fdfa':'#fef2f2'}; padding:14px; border-radius:12px; border:1px solid ${cancelled?'#fecaca': eligible?'var(--border)':'#fecaca'}">
+      ${profilePic}
+      <div style="flex:1"><div style="font-size:18px; font-weight:800">${m.name} ${cancelled?'<span style="font-size:12px; color:red">🚫 সদস্যপদ বাতিল</span>': eligible?'':'<span style="font-size:12px; color:red">⚠️ লাভ পাবে না</span>'}</div><div style="font-size:13px; color:var(--muted)">${m.phone} • ${m.note||'সদস্য'} • WhatsApp: ${m.whatsapp||m.phone}</div><div style="font-size:11px; margin-top:4px">${cancelled?'🚫 টানা '+consecutive+' মাস মিস - সদস্যপদ বাতিল (৩ মাস নিয়ম)': missed===0?'✅ সব কিস্তি নিয়মিত':'⚠️ '+missed+' টি কিস্তি মিস ('+consecutive+' টানা) - নিয়ম অনুযায়ী লাভ বাতিল'}</div></div>
+      <div style="text-align:right"><div style="font-size:12px; color:var(--muted)">মোট জমা (Balance)</div><div style="font-size:20px; font-weight:800; color:var(--primary)">${formatTaka(totalJoma)}</div><div style="font-size:11px; color:var(--muted)">জরিমানা ${formatTakaShort(totalFine)} • লাভ ${cancelled? '০ (বাতিল)': formatTakaShort(Math.floor(calcStats().totalProfit / (db.members.filter(x=>isEligibleForProfit(x.id)).length||1)) )}</div></div>
+    </div>
+    <div class="cards" style="margin-top:12px">
+      <div class="card" style="padding:12px"><div class="card-label">মোট জমা (আপনার Balance)</div><div class="card-value" style="font-size:18px">${formatTaka(totalJoma)}</div><div class="card-sub">${deposits.length} বার জমা • গড় ${formatTakaShort(Math.round(totalJoma/(deposits.length||1)))}</div></div>
+      <div class="card" style="padding:12px"><div class="card-label">জরিমানা দিয়েছে</div><div class="card-value" style="font-size:18px; color:var(--danger)">${formatTaka(totalFine)}</div><div class="card-sub">${fines.length} বার • টানা মিস ${consecutive} মাস</div></div>
+      <div class="card" style="padding:12px"><div class="card-label">ঋণ / বকেয়া</div><div class="card-value" style="font-size:18px">${formatTaka(loanGiven)} <span style="font-size:12px; color:var(--danger)">/ ${formatTakaShort(due)}</span></div><div class="card-sub">${hasOutstandingLoan(mid)?'⚠️ ১ টা বাকি - নতুন নয়':'✅ কোনো বকেয়া নেই'}</div></div>
+      <div class="card" style="padding:12px; background:${cancelled?'#fee2e2': eligible?'#ecfdf5':'#fef2f2'}"><div class="card-label">৫ বছর পর পাবে (লাভ সহ)</div><div class="card-value" style="font-size:16px; color:${cancelled?'var(--danger)': eligible?'var(--success)':'var(--danger)'}">${cancelled?'🚫 বাতিল - আবেদন করুন': eligible?'আসল + লাভ':'শুধু আসল (লাভ নেই)'}</div><div class="card-sub">${cancelled?'৩ মাস টানা মিস - বাতিল': eligible?'নিয়মিত থাকায় লাভ সহ':'মিস করার কারণে লাভ বাতিল'}</div></div>
+    </div>
+    <div style="margin-top:12px; background:white; border:1px solid var(--border); border-radius:12px; overflow:hidden">
+      <div style="background:#f8fafc; padding:10px 14px; font-weight:700; font-size:13px; border-bottom:1px solid var(--border)">📊 All Balance Details - পূর্ণ হিসাব</div>
+      <table style="width:100%; font-size:12px; border-collapse:collapse">
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">👤 নাম</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9; font-weight:700">${m.name}</td></tr>
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">📞 ফোন / WhatsApp</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">${m.phone} / ${m.whatsapp||m.phone}</td></tr>
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">💰 মোট জমা (আপনার Balance)</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9; font-weight:800; color:var(--primary)">${formatTaka(totalJoma)}</td></tr>
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">📈 আপনার লাভের ভাগ</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9; font-weight:700; color:${eligible?'var(--success)':'var(--danger)'}">${eligible? formatTaka(Math.floor(calcStats().totalProfit/(db.members.filter(x=>isEligibleForProfit(x.id)).length||1))): '০ (অযোগ্য)'}</td></tr>
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">🏦 ৫ বছর শেষে মোট পাবেন</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9; font-weight:800">${cancelled? formatTaka(totalJoma): eligible? formatTaka(totalJoma + Math.floor(calcStats().totalProfit/(db.members.filter(x=>isEligibleForProfit(x.id)).length||1))): formatTaka(totalJoma)}</td></tr>
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">⚠️ জরিমানা</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9; color:var(--danger)">${formatTaka(totalFine)} (${fines.length} বার)</td></tr>
+        <tr><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">⏳ মিস কিস্তি</td><td style="padding:8px 12px; border-bottom:1px solid #f1f5f9">${missed} টি (টানা ${consecutive} টি) ${cancelled?'🚫 বাতিল':''}</td></tr>
+        <tr><td style="padding:8px 12px">🏦 ঋণ নিয়েছে / বকেয়া</td><td style="padding:8px 12px">${formatTaka(loanGiven)} / বকেয়া ${formatTaka(due)} (${loans.length} টি লোন)</td></tr>
+      </table>
+    </div>
+    <div style="margin-top:12px"><h4 style="font-size:13px; margin-bottom:6px">📅 জমার ইতিহাস</h4><div class="ledger-month">${deposits.sort((a,b)=>a.monthIdx-b.monthIdx).map(d=>{const label=d.monthIdx===-1?'শুরু': new Date(start.getFullYear(), start.getMonth()+d.monthIdx,1).toLocaleDateString('bn-BD',{month:'short'}); return `<span class="month-pill paid" title="${d.date} - ${d.method||''}">${label} ${formatTakaShort(d.amount)}</span>`;}).join('')||'কোনো জমা নেই'}</div></div>
+    ${fines.length?`<div style="margin-top:10px"><h4 style="font-size:13px; margin-bottom:6px">⚠️ জরিমানা ইতিহাস</h4>${fines.map(f=>`<div style="background:#fef2f2; border:1px solid #fecaca; padding:8px; border-radius:8px; margin-bottom:6px; font-size:12px; display:flex; justify-content:space-between"><span>${f.date} - ${f.reason}</span><b>${formatTakaShort(f.amount)}</b></div>`).join('')}</div>`:''}
+  `;
+}
+function viewPersonal(id){ switchView('hisab'); document.getElementById('personalSelect').value=id; renderPersonal(); document.getElementById('personalCard').scrollIntoView({behavior:'smooth'}); }
+
+function renderReport(){
+  const s=calcStats();
+  const proj=document.getElementById('projectionBox');
+  const totalPossible=db.settings.initial*db.members.length + db.settings.monthly*db.members.length*db.settings.duration;
+  proj.innerHTML=`<div style="display:grid; gap:10px">
+    <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f1f5f9"><span>প্রাথমিক জমা (২০×${db.settings.initial})</span><b>${formatTaka(db.members.length*db.settings.initial)}</b></div>
+    <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f1f5f9"><span>মাসিক জমা (২০×${db.settings.monthly}×${db.settings.duration})</span><b>${formatTaka(db.members.length*db.settings.monthly*db.settings.duration)}</b></div>
+    <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:2px solid var(--primary); font-weight:800"><span>৫ বছরে মোট সম্ভাব্য তহবিল</span><b style="color:var(--primary)">${formatTaka(totalPossible)}</b></div>
+    <div style="display:flex; justify-content:space-between"><span>বর্তমান জমা</span><b style="color:var(--success)">${formatTaka(s.totalDeposit)} (${Math.round(s.totalDeposit/totalPossible*100)}%)</b></div>
+    <div style="display:flex; justify-content:space-between"><span>জরিমানা আদায়</span><b style="color:var(--danger)">${formatTaka(s.totalFines)}</b></div>
+    <div style="display:flex; justify-content:space-between"><span>ঋণ লাভ (এ পর্যন্ত)</span><b>${formatTaka(s.totalProfit)}</b></div>
+    <div style="background:#fef2f2; padding:10px; border-radius:8px; text-align:center; border:1px solid #fecaca; font-size:12px">🔒 ৫ বছরের আগে কোনো টাকা তোলা যাবে না। মেয়াদ শেষে বন্টন।</div>
+  </div>`;
+  const shareBox=document.getElementById('profitShareBox');
+  const eligibleCount=db.members.filter(m=> isEligibleForProfit(m.id)).length;
+  const perHeadBase=Math.floor(s.totalDeposit / db.members.length);
+  // profit only for eligible; if someone ineligible, they get no profit, so profit divided among eligible only
+  const profitPerEligible=eligibleCount? Math.floor(s.totalProfit / eligibleCount):0;
+  const perHeadTotalEligible=perHeadBase + profitPerEligible;
+  shareBox.innerHTML=`<div style="font-size:13px; line-height:1.8">
+    <div style="background:${eligibleCount===db.members.length?'#fffbeb':'#fef2f2'}; padding:10px; border-radius:8px; border:1px solid ${eligibleCount===db.members.length?'#fde68a':'#fecaca'}; text-align:center">
+      ${eligibleCount===db.members.length?`নিয়মিত সদস্য ${eligibleCount} জন - সবাই লাভ পাবে<br><span style="font-size:22px; font-weight:800">${formatTaka(perHeadTotalEligible)}</span><br><span style="font-size:11px; color:var(--muted)">মূল ${formatTakaShort(perHeadBase)} + লাভ ${formatTakaShort(profitPerEligible)}</span>`:`⚠️ ${db.members.length-eligibleCount} জন মিস করেছে - তারা শুধু আসল পাবে<br><b>নিয়মিত ${eligibleCount} জন পাবে ${formatTaka(perHeadTotalEligible)} করে</b><br><span style="font-size:11px">মিস করা সদস্য পাবে ${formatTakaShort(perHeadBase)} (লাভ নেই)</span>`}
+    </div>
+    <div style="margin-top:10px"><b>বন্টন নিয়ম:</b><ul style="margin-left:16px; margin-top:6px"><li>৫ বছর শেষে একসাথে বন্টন - আগে তোলা যাবে না</li><li>নিয়মিত সদস্য = আসল + লাভ + জরিমানার ভাগ</li><li>মিস করা সদস্য = শুধু আসল টাকা ফেরত</li></ul></div>
+  </div>`;
+}
+
+// Modals & Admin
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function previewPhoto(input){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024) return alert('ছবি 2MB এর বেশি - ছোট ছবি দিন');
+  const reader = new FileReader();
+  reader.onload = e=>{
+    document.getElementById('mPhotoData').value = e.target.result;
+    document.getElementById('mPhotoPreview').src = e.target.result;
+    document.getElementById('mPhotoPreview').style.display='block';
+    document.getElementById('mPhotoPlaceholder').style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+function clearPhoto(){
+  document.getElementById('mPhotoData').value='';
+  document.getElementById('mPhotoPreview').style.display='none';
+  document.getElementById('mPhotoPlaceholder').style.display='flex';
+  document.getElementById('mPhoto').value='';
+}
+function updatePhotoPreview(src, name){
+  const img=document.getElementById('mPhotoPreview');
+  const ph=document.getElementById('mPhotoPlaceholder');
+  if(src){
+    img.src=src; img.style.display='block'; ph.style.display='none';
+    ph.textContent=name? name.charAt(0):'?';
+  } else {
+    img.style.display='none'; ph.style.display='flex';
+    ph.textContent=name? name.charAt(0):'?';
+  }
+}
+function openMemberModal(){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  document.getElementById('mId').value=''; document.getElementById('mName').value=''; document.getElementById('mPhone').value=''; document.getElementById('mWhatsapp').value=''; document.getElementById('mPassword').value=db.settings.memberPass||'1234'; document.getElementById('mNote').value=''; document.getElementById('mPhotoData').value='';
+  updatePhotoPreview('', '');
+  document.getElementById('mPhoto').value='';
+  openModal('memberModal');
+}
+function editMember(id){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  const m=db.members.find(x=>x.id===id);
+  document.getElementById('mId').value=m.id; document.getElementById('mName').value=m.name; document.getElementById('mPhone').value=m.phone; document.getElementById('mWhatsapp').value=m.whatsapp||m.phone; document.getElementById('mPassword').value=m.password||db.settings.memberPass||'1234'; document.getElementById('mNote').value=m.note||''; document.getElementById('mPhotoData').value=m.photo||'';
+  updatePhotoPreview(m.photo||'', m.name);
+  document.getElementById('mPhoto').value='';
+  openModal('memberModal');
+}
+function saveMember(){
+  const id=document.getElementById('mId').value;
+  const name=document.getElementById('mName').value.trim();
+  const phone=document.getElementById('mPhone').value.trim();
+  const whatsapp=document.getElementById('mWhatsapp').value.trim()||phone;
+  const password=document.getElementById('mPassword').value.trim()||db.settings.memberPass||'1234';
+  const note=document.getElementById('mNote').value.trim();
+  const photo=document.getElementById('mPhotoData').value||'';
+  if(!name) return alert('নাম দিন');
+  if(!phone) return alert('ফোন দিন');
+  if(id){ const m=db.members.find(x=>x.id===id); m.name=name; m.phone=phone; m.whatsapp=whatsapp; m.password=password; m.note=note; m.photo=photo; }
+  else { if(db.members.length>=100) return alert('সর্বোচ্চ ১০০ জন'); db.members.push({id:'m'+Date.now(), name, phone, whatsapp, password, note, photo, status:'active'}); }
+  closeModal('memberModal'); saveDB();
+}
+function deleteMember(id){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  if(!confirm('সদস্য মুছবেন? তার সব হিসাব মুছে যাবে!')) return;
+  db.members=db.members.filter(m=>m.id!==id); db.deposits=db.deposits.filter(d=>d.memberId!==id); db.loans=db.loans.filter(l=>l.memberId!==id); db.fines=db.fines.filter(f=>f.memberId!==id); saveDB();
+}
+function reset20Members(){
+  if(!isAdmin) return alert('Admin লগইন প্রয়োজন');
+  if(!confirm('২০ জনের ডিফল্ট তালিকা ফিরিয়ে আনবেন?')) return;
+  localStorage.removeItem(STORAGE_KEY); db=getDefaultDB(); seedInitial(); saveDB(); alert('রিসেট সম্পন্ন');
+}
+function openSettings(){
+  document.getElementById('sName').value=db.settings.name;
+  document.getElementById('sInitial').value=db.settings.initial;
+  document.getElementById('sMonthly').value=db.settings.monthly;
+  document.getElementById('sRate').value=db.settings.rate;
+  document.getElementById('sDuration').value=db.settings.duration;
+  document.getElementById('sStart').value=db.settings.start;
+  document.getElementById('sPass').value=db.settings.pass;
+  document.getElementById('sBkash').value=db.settings.bkash;
+  document.getElementById('sNagad').value=db.settings.nagad;
+  document.getElementById('sFineDay').value=db.settings.fineDay;
+  document.getElementById('sFineAmount').value=db.settings.fineAmount;
+  document.getElementById('sBkashFee').value=db.settings.bkashFee||20;
+  document.getElementById('sNagadFee').value=db.settings.nagadFee||20;
+  document.getElementById('sMemberPass').value=db.settings.memberPass||'1234';
+  document.getElementById('sReminderMsg').value=db.settings.reminderMsg||'';
+  openModal('settingsModal');
+}
+function saveSettings(){
+  db.settings.name=document.getElementById('sName').value||db.settings.name;
+  db.settings.initial=parseInt(document.getElementById('sInitial').value)||1000;
+  db.settings.monthly=parseInt(document.getElementById('sMonthly').value)||500;
+  db.settings.rate=parseFloat(document.getElementById('sRate').value)||5;
+  db.settings.duration=parseInt(document.getElementById('sDuration').value)||60;
+  db.settings.start=document.getElementById('sStart').value||db.settings.start;
+  db.settings.pass=document.getElementById('sPass').value||db.settings.pass;
+  db.settings.bkash=document.getElementById('sBkash').value||'01723291181';
+  db.settings.nagad=document.getElementById('sNagad').value||'01723291181';
+  db.settings.bkashFee=parseInt(document.getElementById('sBkashFee').value)||20;
+  db.settings.nagadFee=parseInt(document.getElementById('sNagadFee').value)||20;
+  db.settings.memberPass=document.getElementById('sMemberPass').value||'1234';
+  db.settings.reminderMsg=document.getElementById('sReminderMsg').value||db.settings.reminderMsg;
+  db.settings.fineDay=parseInt(document.getElementById('sFineDay').value)||10;
+  db.settings.fineAmount=parseInt(document.getElementById('sFineAmount').value)||30;
+  closeModal('settingsModal'); saveDB(); alert('সেটিংস সেভ হয়েছে');
+}
+function toggleAdmin(){
+  if(isAdmin){ isAdmin=false; document.getElementById('adminBadge').style.display='none'; document.getElementById('adminToggleBtn').textContent='🔓 Admin লগইন'; renderMembers(); renderJoma(); renderLoans(); return; }
+  const pass=prompt('Admin পাসওয়ার্ড দিন (ডিফল্ট: admin123)');
+  if(pass===null) return;
+  if(pass===db.settings.pass){ isAdmin=true; document.getElementById('adminBadge').style.display='inline-block'; document.getElementById('adminToggleBtn').textContent='🔒 লগআউট'; renderMembers(); renderJoma(); renderLoans(); alert('Admin লগইন সফল'); }
+  else alert('ভুল পাসওয়ার্ড');
+}
+function switchView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.view===name));
+  if(name==='dashboard'){renderKPIs(); renderRecent(); renderTopSavers(); checkAutoReminder();}
+  if(name==='members') renderMembers();
+  if(name==='joma') renderJoma();
+  if(name==='loan') renderLoans();
+  if(name==='hisab'){renderLedger(); renderPersonal(); renderTransparency();}
+  if(name==='report') renderReport();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function exportCSV(){
+  let csv='তারিখ,ধরন,সদস্য,বিবরণ,পরিমাণ,ব্যালেন্স\n';
+  let tx=[];
+  db.deposits.forEach(d=>{const m=db.members.find(x=>x.id===d.memberId); tx.push({date:d.date, type:'জমা', member:m?m.name:'-', desc:d.type==='initial'?'প্রাথমিক জমা':'মাসিক জমা ('+(d.method||'')+')', amount:d.amount});});
+  db.fines.forEach(f=>{const m=db.members.find(x=>x.id===f.memberId); tx.push({date:f.date, type:'জরিমানা', member:m?m.name:'-', desc:f.reason, amount:f.amount});});
+  db.loans.forEach(l=>{const m=db.members.find(x=>x.id===l.memberId); tx.push({date:l.date, type:'ঋণ', member:m?m.name:'-', desc:'ঋণ বিতরণ', amount:-l.amount});});
+  db.loans.forEach(l=> (l.repayments||[]).forEach(r=>{const m=db.members.find(x=>x.id===l.memberId); tx.push({date:r.date, type:'ফেরত', member:m?m.name:'-', desc:'ঋণ ফেরত', amount:r.amount});}));
+  tx.sort((a,b)=> new Date(a.date)-new Date(b.date));
+  let bal=0; tx.forEach(t=>{bal+=t.amount; csv+=`"${t.date}","${t.type}","${t.member}","${t.desc}",${t.amount},${bal}\n`});
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=`somiti_${new Date().toISOString().slice(0,10)}.csv`; a.click();
+}
+function shareWhatsApp(){
+  const s=calcStats();
+  const text=`${db.settings.name} - হিসাব রিপোর্ট\nমোট জমা: ${formatTaka(s.totalDeposit)}\nজরিমানা: ${formatTaka(s.totalFines)}\nলাভ: ${formatTaka(s.totalProfit)}\nব্যালেন্স: ${formatTaka(s.balance)}\nনিয়ম: ১-${db.settings.fineDay} তারিখে জমা, ৩০৳ জরিমানা, ৫ বছর লক\nbKash: ${db.settings.bkash} | Nagad: ${db.settings.nagad}\nদেখুন: ${location.href}`;
+  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+}
+function toWaNumber(num){ return '88'+ num.replace(/\D/g,'').slice(-11); }
+function buildReminderMessage(memberId, monthIdx){
+  const m=db.members.find(x=>x.id===memberId);
+  const start=new Date(db.settings.start);
+  const md=new Date(start.getFullYear(), start.getMonth()+monthIdx, 1);
+  const monthLabel=md.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+  let msg=db.settings.reminderMsg||"Assalamualaikum {name}, {somiti} er {month} maser 500 Taka jomar last date 10 tarikh. 10 tarikher por dile 30 Taka jorimana. bKash/Nagad: 01723291181 e 520 Taka (khoroch soho) pathan. Dhonnobad.";
+  msg=msg.replace('{name}', m?m.name:'').replace('{somiti}', db.settings.name).replace('{month}', monthLabel).replace('{amount}', db.settings.monthly).replace('{bkash}', db.settings.bkash).replace('{nagad}', db.settings.nagad);
+  return msg;
+}
+function sendReminderTo(memberId){
+  const m=db.members.find(x=>x.id===memberId);
+  if(!m || !m.whatsapp) return alert('WhatsApp number nei');
+  const start=new Date(db.settings.start);
+  const now=new Date();
+  let idx=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+  if(idx<0) idx=0; if(idx>=db.settings.duration) idx=db.settings.duration-1;
+  // check if already paid for current month
+  if(db.deposits.find(d=>d.memberId===memberId && d.monthIdx===idx)){
+    if(!confirm(m.name+' ei maser taka already diyeche. Tobuo message pathaben?')) return;
+  }
+  const msg=buildReminderMessage(memberId, idx);
+  const wa=toWaNumber(m.whatsapp||m.phone);
+  window.open('https://wa.me/'+wa+'?text='+encodeURIComponent(msg), '_blank');
+}
+function sendAllReminders(){
+  const start=new Date(db.settings.start);
+  const now=new Date();
+  let idx=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+  if(idx<0) idx=0; if(idx>=db.settings.duration) idx=db.settings.duration-1;
+  const pending=db.members.filter(m=> !db.deposits.find(d=>d.memberId===m.id && d.monthIdx===idx));
+  if(pending.length===0) return alert('✅ Sobar joma hoye geche, kauke reminder lagbe na!');
+  if(!confirm(pending.length+' jon er joma baki. WhatsApp e reminder pathaben? (proti joner jonno alada window khulbe)')) return;
+  pending.forEach((m,i)=>{
+    setTimeout(()=> sendReminderTo(m.id), i*800);
+  });
+  alert(pending.length+' joner jonno WhatsApp link khulche... Pop-up allow korun.');
+}
+function sendRemindersForCurrentMonth(){
+  const sel=document.getElementById('jomaMonthSelect');
+  const monthIdx= sel? parseInt(sel.value):0;
+  const start=new Date(db.settings.start);
+  const md=new Date(start.getFullYear(), start.getMonth()+monthIdx, 1);
+  const monthLabel=md.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+  const pending=db.members.filter(m=> !db.deposits.find(d=>d.memberId===m.id && d.monthIdx===monthIdx));
+  if(pending.length===0) return alert('✅ '+monthLabel+' - sobar joma hoye geche!');
+  if(!confirm(monthLabel+' - '+pending.length+' jon baki. WhatsApp reminder pathaben?')) return;
+  pending.forEach((m,i)=>{
+    setTimeout(()=>{
+      const msg=buildReminderMessage(m.id, monthIdx);
+      const wa=toWaNumber(m.whatsapp||m.phone);
+      window.open('https://wa.me/'+wa+'?text='+encodeURIComponent(msg), '_blank');
+    }, i*800);
+  });
+}
+function checkAutoReminder(){
+  const now=new Date();
+  const day=now.getDate();
+  const box=document.getElementById('autoReminderBox');
+  if(!box) return;
+  const start=new Date(db.settings.start);
+  let idx=(now.getFullYear()-start.getFullYear())*12 + (now.getMonth()-start.getMonth());
+  if(idx<0) idx=0; if(idx>=db.settings.duration) idx=db.settings.duration-1;
+  const md=new Date(start.getFullYear(), start.getMonth()+idx, 1);
+  const monthLabel=md.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+  const pending=db.members.filter(m=> !db.deposits.find(d=>d.memberId===m.id && d.monthIdx===idx));
+  if(day>=5 && day<=10 && pending.length>0){
+    const daysLeft=db.settings.fineDay - day;
+    box.style.display='block';
+    box.innerHTML=`<div style="background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:white; padding:14px; border-radius:14px; margin-bottom:16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:space-between; box-shadow:0 4px 12px rgba(0,0,0,0.15)">
+      <div style="flex:1; min-width:200px">
+        <div style="font-size:14px; font-weight:800">💬 WhatsApp Auto Reminder - ${monthLabel}</div>
+        <div style="font-size:12px; opacity:0.95; margin-top:4px">Aj ${day} tarikh! ${pending.length} jon er joma baki. Last date <b>${db.settings.fineDay} tarikh</b>. ${daysLeft>=0? daysLeft+' din baki':'Late hole '+db.settings.fineAmount+'৳ jorimana'} - akhoni message pathan.</div>
+        <div style="font-size:11px; opacity:0.9; margin-top:6px">⏰ 5-10 tarikh porjonto protidin auto reminder dekhabe</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button class="btn" style="background:white; color:#128C7E; font-weight:800" onclick="sendAllReminders()">💬 ${pending.length} jonke WhatsApp korun</button>
+        <button class="btn btn-outline" style="border-color:white; color:white" onclick="document.getElementById('autoReminderBox').style.display='none'">✕ pore</button>
+      </div>
+    </div>`;
+  } else if(day>=11 && pending.length>0){
+    box.style.display='block';
+    box.innerHTML=`<div style="background:#fef2f2; border:1px solid #fecaca; padding:12px; border-radius:12px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px">
+      <div><b style="color:#991b1b">⚠️ ${monthLabel} - ${pending.length} jon late!</b> <span style="font-size:12px; color:#991b1b">Aj ${day} tarikh, tader ${db.settings.fineAmount}৳ jorimana hobe.</span></div>
+      <button class="btn btn-danger btn-sm" onclick="sendAllReminders()">💬 Reminder + Jorimana janano</button>
+    </div>`;
+  } else {
+    box.style.display='none';
+  }
+}
+
+function renderTransparency(){
+  const q=(document.getElementById('transSearch')?.value||'').toLowerCase();
+  const f=document.getElementById('transFilter')?.value||'all';
+  const tbody=document.getElementById('transTable');
+  if(!tbody) return;
+  let rows=[];
+  db.deposits.forEach(d=>{
+    if(d.monthIdx===-1) return;
+    const m=db.members.find(x=>x.id===d.memberId);
+    const start=new Date(db.settings.start);
+    const md=new Date(start.getFullYear(), start.getMonth()+d.monthIdx,1);
+    const monthLabel=md.toLocaleDateString('bn-BD',{month:'long', year:'numeric'});
+    const fine=db.fines.find(x=>x.memberId===d.memberId && x.monthIdx===d.monthIdx);
+    const eligible=isEligibleForProfit(d.memberId);
+    rows.push({date:d.date, member:m?m.name:'-', memberId:d.memberId, monthLabel, method:d.method||'Cash', amount:d.amount, fine: fine?fine.amount:0, eligible, sortDate:new Date(d.date)});
+  });
+  rows.sort((a,b)=> b.sortDate - a.sortDate);
+  let filtered=rows.filter(r=>{
+    if(f!=='all' && !r.date.startsWith(f)) return false;
+    if(q && !r.member.toLowerCase().includes(q) && !r.date.includes(q)) return false;
+    return true;
+  });
+  tbody.innerHTML=filtered.slice(0,100).map(r=>`<tr>
+    <td style="white-space:nowrap">${r.date}</td>
+    <td><b>${r.member}</b></td>
+    <td>${r.monthLabel}</td>
+    <td><span class="badge ${r.method==='bKash'?'badge-danger':r.method==='Nagad'?'badge-warning':'badge-success'}">${r.method==='bKash'?'📱 bKash':r.method==='Nagad'?'📱 Nagad':'💵 Cash'}</span></td>
+    <td style="font-weight:800; color:var(--success)">${formatTakaShort(r.amount)}</td>
+    <td style="color:${r.fine?'var(--danger)':'var(--muted)'}">${r.fine?formatTakaShort(r.fine):'-'}</td>
+    <td><span class="badge ${r.eligible?'badge-success':'badge-danger'}">${r.eligible?'✅ লাভ পাবে':'❌ লাভ নেই'}</span></td>
+  </tr>`).join('') || '<tr><td colspan="7" class="empty">কোনো জমা নেই</td></tr>';
+  if(filtered.length>100) tbody.innerHTML+=`<tr><td colspan="7" style="text-align:center; font-size:11px; color:var(--muted)">আরও ${filtered.length-100} টি রেকর্ড আছে - সার্চ করে দেখুন</td></tr>`;
+}
+
+function memberLogin(){
+  const phone=document.getElementById('loginPhone').value.trim();
+  const pass=document.getElementById('loginPass').value.trim();
+  if(!phone||!pass) return alert('ফোন ও পাসওয়ার্ড দিন');
+  const m=db.members.find(x=> (x.phone===phone || x.whatsapp===phone) && x.password===pass);
+  if(!m) return alert('ভুল ফোন বা পাসওয়ার্ড! Admin এর কাছে সঠিক পাসওয়ার্ড নিন (ডিফল্ট 1234)');
+  // show dashboard
+  localStorage.setItem('lastMemberLogin', m.id);
+  renderMemberDashboard(m.id);
+}
+function renderMemberDashboard(memberId){
+  const m=db.members.find(x=>x.id===memberId);
+  if(!m) return;
+  const deposits=db.deposits.filter(d=>d.memberId===memberId);
+  const fines=db.fines.filter(f=>f.memberId===memberId);
+  const totalJoma=deposits.reduce((a,b)=>a+b.amount,0);
+  const totalFine=fines.reduce((a,b)=>a+b.amount,0);
+  const loans=db.loans.filter(l=>l.memberId===memberId);
+  const loanGiven=loans.reduce((a,b)=>a+b.amount,0);
+  let due=0; loans.forEach(l=>{const p=l.amount+l.amount*l.rate/100; const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0); due+=Math.max(0,p-l.amount>0?p-(l.repayments||[]).reduce((a,b)=>a+b.amount,0):0); due=Math.max(0,due);}); // simplified
+  // recalc due correctly
+  due=0; loans.forEach(l=>{const payable=l.amount+l.amount*l.rate/100; const paid=(l.repayments||[]).reduce((a,b)=>a+b.amount,0); due+=Math.max(0,payable-paid);});
+  const s=calcStats();
+  const eligible=isEligibleForProfit(memberId);
+  const cancelled=isCancelled(memberId);
+  const profitShare = eligible? Math.floor(s.totalProfit/(db.members.filter(x=>isEligibleForProfit(x.id)).length||1)):0;
+  const totalPaben = cancelled? totalJoma : eligible? totalJoma+profitShare : totalJoma;
+  const mainBalance = totalJoma;
+  const liveLave = profitShare;
+  const form=document.getElementById('memberLoginForm');
+  const dash=document.getElementById('memberDashboard');
+  form.style.display='none';
+  dash.style.display='block';
+  const photoHtml = m.photo? `<img src="${m.photo}" style="width:80px; height:80px; border-radius:50%; border:3px solid #0ea5e9; object-fit:cover">` : `<div style="width:80px; height:80px; border-radius:50%; background:#0ea5e9; color:white; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:800">${m.name.charAt(0)}</div>`;
+  dash.innerHTML=`
+    <div style="text-align:center; padding:16px; background:linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color:white; border-radius:12px">
+      ${photoHtml}
+      <div style="font-size:18px; font-weight:800; margin-top:8px">${m.name}</div>
+      <div style="font-size:12px; opacity:0.9">${m.phone} • ${m.whatsapp||m.phone}</div>
+      <div style="margin-top:8px; display:inline-block; background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:999px; font-size:11px">${cancelled?'🚫 বাতিল': eligible?'✅ নিয়মিত':'⚠️ লাভ নেই'} • Offline Live</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px">
+      <div style="background:#f0fdfa; border:1px solid var(--border); padding:12px; border-radius:10px; text-align:center"><div style="font-size:11px; color:var(--muted)">💰 Main Balance (আপনার জমা)</div><div style="font-size:18px; font-weight:800; color:#0f766e">${formatTaka(mainBalance)}</div><div style="font-size:10px; color:var(--muted)">${deposits.length} বার জমা</div></div>
+      <div style="background:#ecfdf5; border:1px solid #a7f3d0; padding:12px; border-radius:10px; text-align:center"><div style="font-size:11px; color:var(--muted)">📈 Live Lave (এখন পর্যন্ত)</div><div style="font-size:18px; font-weight:800; color:#059669">${formatTaka(liveLave)}</div><div style="font-size:10px; color:var(--muted)">${eligible?'আপনার ভাগ': cancelled?'বাতিল': 'অযোগ্য'}</div></div>
+    </div>
+    <div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:10px; text-align:center; margin-top:10px"><div style="font-size:12px; color:var(--muted)">🏦 ৫ বছর শেষে মোট পাবেন</div><div style="font-size:20px; font-weight:800">${formatTaka(totalPaben)}</div><div style="font-size:11px; color:var(--muted)">${cancelled?'শুধু আসল (বাতিল)': eligible? 'আসল + লাভ':'শুধু আসল'}</div></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; font-size:12px">
+      <div style="background:#fef2f2; padding:8px; border-radius:8px; border:1px solid #fecaca; text-align:center">⚠️ জরিমানা<br><b>${formatTaka(totalFine)}</b></div>
+      <div style="background:#f3e8ff; padding:8px; border-radius:8px; border:1px solid #d8b4fe; text-align:center">⏳ মিস<br><b>${getMissedCount(memberId)} টি (টানা ${getConsecutiveMissed(memberId)})</b></div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:8px">
+      <button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('memberDashboard').style.display='none'; document.getElementById('memberLoginForm').style.display='block'; document.getElementById('loginPass').value=''">🔓 Logout</button>
+      <button class="btn btn-success" style="flex:1; background:#0ea5e9" onclick="switchView('hisab'); document.getElementById('personalSelect').value='${m.id}'; renderPersonal();">📊 Details Dekhun</button>
+    </div>
+    <div style="background:#f8fafc; padding:10px; border-radius:8px; margin-top:10px; font-size:11px; text-align:center; color:var(--muted)">🌐 Offline eo dekha jabe • Live update auto • Admin password change korle abar login korun</div>
+  `;
+  // cache for offline
+  localStorage.setItem('lastMemberLogin', memberId);
+}
+function checkOffline(){
+  const badge=document.getElementById('offlineBadge');
+  const text=document.getElementById('offlineStatusText');
+  const online=navigator.onLine;
+  if(badge){ badge.textContent= online? '🌐 Online - Live' : '📴 Offline - Saved Data'; badge.style.background= online? '#25D366':'#f59e0b'; badge.style.color= online? 'white':'#78350f'; }
+  if(text) text.textContent= online? 'Online - Live Update On':'Offline - Saved Data Dekhacchen';
+}
+window.addEventListener('online', checkOffline);
+window.addEventListener('offline', checkOffline);
+function clearAllData(){ if(!isAdmin) return alert('Admin লগইন প্রয়োজন'); if(!confirm('সব ডাটা মুছে যাবে!')) return; if(!confirm('আবার নিশ্চিত করুন')) return; db.deposits=[]; db.loans=[]; db.fines=[]; saveDB(); }
+function renderAll(){ updateCancelledStatus(); renderKPIs(); renderMembers(); renderJoma(); renderLoans(); renderLedger(); renderPersonal(); renderReport(); renderRecent(); renderTopSavers(); renderTransparency(); checkAutoReminder(); checkLoanQueue(); checkOffline(); }
+
+loadDB();
+document.getElementById('loanDate').value=new Date().toISOString().slice(0,10);
+document.getElementById('repayDate').value=new Date().toISOString().slice(0,10);
+document.getElementById('cjDate').value=new Date().toISOString().slice(0,10);
+document.getElementById('jomaPayDate').value=new Date().toISOString().slice(0,10);
+document.getElementById('jomaMethod').addEventListener('change', renderJoma);
+renderAll();
+setTimeout(checkAutoReminder, 500);
+// PWA Service Worker - Offline
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredPrompt=e; document.getElementById('installBanner').style.display='flex'; });
+function installApp(){
+  if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; document.getElementById('installBanner').style.display='none'; }); }
+  else openModal('installModal');
+}
+// Show banner after 3 sec if not installed
+setTimeout(()=>{ if(!window.matchMedia('(display-mode: standalone)').matches && !deferredPrompt) document.getElementById('installBanner').style.display='flex'; }, 3000);
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').then(()=>console.log('SW registered')).catch(()=>{});
+}
+checkOffline();
+// Flexible member count - no fixed 20
+console.log('Flexible members:', db.members.length, 'Mobile & Laptop Ready - PWA Offline Enabled');
+// Auto login last member if offline
+const last = localStorage.getItem('lastMemberLogin');
+if(last && db.members.find(x=>x.id===last)){
+  // keep for quick access
+}
+// Enter key for member login
+document.getElementById('loginPass')?.addEventListener('keypress', e=>{ if(e.key==='Enter') memberLogin(); });
+document.getElementById('loginPhone')?.addEventListener('keypress', e=>{ if(e.key==='Enter') memberLogin(); });
+setTimeout(()=>{populateSelects(); renderJoma(); updateLoanPreview();},100);
+document.querySelectorAll('.modal-overlay').forEach(el=> el.addEventListener('click', e=>{ if(e.target===el) closeModal(el.id)}));
+</script>
+</body>
+</html>
